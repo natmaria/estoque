@@ -22,13 +22,18 @@ import models.Grupo;
  * @author nmpetry
  */
 public class grupoController {
-    Grupo objGrupo;
+    static Grupo objGrupo;
     JTable jtbGrupos = null;
     
       public grupoController (Grupo objGrupo, JTable jtbGrupos) 
       {
         this.objGrupo = objGrupo;
         this.jtbGrupos = jtbGrupos;
+      }
+      
+       public grupoController () 
+      {
+       
       }
       
       public void preencherTabela() 
@@ -45,9 +50,10 @@ public class grupoController {
         try
         {
             String SQL = "";
-            SQL = " SELECT id,nome,info,status ";
-            SQL+=" FROM grupos ";
-            SQL+=" WHERE status=1 ";
+            SQL = " SELECT id,nome,info,s.nome  ";
+            SQL+=" FROM grupos g, status s ";
+            SQL+=" WHERE g.status=s.id ";
+            SQL+=" WHERE g.status=1 ";
             SQL+= " ORDER BY nome ";
             result = ConnectionFactory.stmt.executeQuery(SQL);
             
@@ -124,5 +130,47 @@ public class grupoController {
         );
     }
 
-      
+    public  static Grupo buscar(int id)
+    {
+        try 
+        {
+            ConnectionFactory.abreConexao();
+            ResultSet rs = null;
+
+            String SQL = "";
+            SQL = " SELECT id,nome,info,status ";
+            SQL += " FROM grupos ";
+            SQL += " WHERE g.id = '" + id + "'";
+            //stm.executeQuery(SQL);  
+        
+            try {
+//                System.out.println("Vai Executar Conexão em buscar grupo");
+                rs = ConnectionFactory.stmt.executeQuery(SQL);
+//                System.out.println("Executou Conexão em buscar grupo");
+
+                objGrupo = new Grupo();
+
+                if (rs.next() == true) {
+                    objGrupo.setId(rs.getInt(1));
+                    objGrupo.setNome(rs.getString(2));
+                    objGrupo.setInfo(rs.getString(3));
+                    objGrupo.setStatus(rs.getInt(4));
+                }
+            }
+            catch (SQLException ex )
+            {
+                System.out.println("ERRO de SQL: " + ex.getMessage().toString());
+                return null;
+            }
+        }
+         catch (Exception e) 
+        {
+            System.out.println("ERRO: " + e.getMessage().toString());
+            return null;
+        }
+//    System.out.println ("Executou buscar aluno com sucesso");
+    return objGrupo;
+    }
+    
+    
 }

@@ -8,6 +8,7 @@ package views;
 import controllers.grupoController;
 import estoque.Principal;
 import java.sql.SQLException;
+import models.Grupo;
 import tools.Combos;
 
 /**
@@ -16,6 +17,8 @@ import tools.Combos;
  */
 public class viewGrupos extends javax.swing.JFrame {
  Combos objComboStatus;
+ int id;
+ Grupo objGrupo;
     /**
      * Creates new form viewGrupos
      */
@@ -52,7 +55,7 @@ public class viewGrupos extends javax.swing.JFrame {
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lblStatus = new javax.swing.JLabel();
-        jcbStatus = new javax.swing.JComboBox<>();
+        jcbStatus = new javax.swing.JComboBox<String>();
         lblInfo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaInfo = new javax.swing.JTextArea();
@@ -64,7 +67,6 @@ public class viewGrupos extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(600, 600));
 
@@ -87,7 +89,7 @@ public class viewGrupos extends javax.swing.JFrame {
         lblStatus.setForeground(new java.awt.Color(204, 0, 0));
         lblStatus.setText("Status");
 
-        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lblInfo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblInfo.setForeground(new java.awt.Color(204, 0, 0));
@@ -108,6 +110,11 @@ public class viewGrupos extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtbGrupos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtbGruposMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jtbGrupos);
 
         btnInserir.setBackground(new java.awt.Color(51, 153, 255));
@@ -249,6 +256,24 @@ public class viewGrupos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
+    private void jtbGruposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbGruposMouseClicked
+        // TODO add your handling code here:
+        int linha = jtbGrupos.getSelectedRow();
+        id = (int) jtbGrupos.getModel().getValueAt(linha, 0);
+        grupoController grupoCon = new grupoController();
+        objGrupo = grupoCon.buscar(id);
+        preencherCampos();
+//        System.out.println(id);
+    }//GEN-LAST:event_jtbGruposMouseClicked
+
+    
+    private void preencherCampos()
+    {
+        txtId.setText(String.valueOf(objGrupo.getId()));
+        txtNome.setText(objGrupo.getNome());
+        objComboStatus.SetaComboBox(String.valueOf(objGrupo.getStatus()));
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnExcluir;
