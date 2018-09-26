@@ -8,6 +8,8 @@ package controllers;
 import estoque.ConnectionFactory;
 import java.awt.Color;
 import java.awt.Component;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -31,6 +33,11 @@ public class grupoController {
         this.jtbGrupos = jtbGrupos;
       }
       
+       public grupoController (Grupo objGrupo) 
+      {
+       this.objGrupo=objGrupo;
+      }
+       
        public grupoController () 
       {
        
@@ -172,5 +179,32 @@ public class grupoController {
     return objGrupo;
     }
     
+    
+    public boolean incluir()
+    {
+        
+        ConnectionFactory.abreConexao();
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try 
+        {
+            stmt = con.prepareStatement("INSERT INTO grupos (nome, info, status)VALUES(?,?,?)");
+            stmt.setString(1, objGrupo.getNome());
+            stmt.setString(2, objGrupo.getInfo());
+            stmt.setInt(3, objGrupo.getStatus());
+            
+            stmt.executeUpdate();
+            
+            return true;
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+        
+    }
     
 }

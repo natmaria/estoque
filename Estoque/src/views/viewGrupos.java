@@ -6,6 +6,7 @@
 package views;
 
 import controllers.grupoController;
+import estoque.CaixaDeDialogo;
 import estoque.Principal;
 import java.sql.SQLException;
 import models.Grupo;
@@ -238,7 +239,27 @@ public class viewGrupos extends javax.swing.JFrame {
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         // TODO add your handling code here:
-        
+        if (validarDados()==true)
+        {
+            guardarDados();
+            grupoController grupoCon = new grupoController(objGrupo); 
+            try
+            {
+            boolean inclusao = grupoCon.incluir();
+                if (inclusao ==true)
+                {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo inserido com sucesso!", "Inserido", 'i');
+                }
+                else
+                {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir grupo.", "ERRO", 'e');
+                }
+            }
+            catch (Exception e)
+            {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
+            }    
+        }   
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -272,8 +293,67 @@ public class viewGrupos extends javax.swing.JFrame {
         txtId.setText(String.valueOf(objGrupo.getId()));
         txtNome.setText(objGrupo.getNome());
         objComboStatus.SetaComboBox(String.valueOf(objGrupo.getStatus()));
-        
+        jtaInfo.setText(objGrupo.getInfo());
     }
+    
+    private void limparCampos()
+    {
+        txtId.setText("");
+        txtNome.setText("");
+        objComboStatus.SetaComboBox("");
+        jtaInfo.setText("");
+        
+        atualizarTabela();
+    }
+    
+     private void atualizarTabela() 
+    {
+        try 
+        {
+            grupoController grupoCon = new grupoController(null, jtbGrupos);
+            grupoCon.preencherTabela();
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
+        }
+    }
+     
+    private boolean validarDados() 
+    {
+        try {
+
+           if ((jtaInfo.getText().trim().length()>0) && (txtNome.getText().trim().length()>5))
+            {
+            return true;
+            }
+           else
+           {
+               return false;
+           }
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+            return false;
+        }
+    }
+    
+    private void guardarDados() 
+    {
+        try 
+        {
+            objGrupo = new Grupo();
+            objGrupo.setNome(txtNome.getText());
+            objGrupo.setInfo(jtaInfo.getText());
+
+            Combos c = (Combos) jcbStatus.getSelectedItem();
+            String status = c.getCodigo();
+            objGrupo.setStatus(Integer.parseInt(status));
+        }
+        catch(Exception ex)
+        {
+        CaixaDeDialogo.obterinstancia().exibirMensagem("Problemas no guardaDados: " + ex.getMessage());
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnExcluir;
