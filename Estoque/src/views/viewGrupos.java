@@ -66,6 +66,7 @@ public class viewGrupos extends javax.swing.JFrame {
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -162,6 +163,17 @@ public class viewGrupos extends javax.swing.JFrame {
             }
         });
 
+        btnLimpar.setBackground(new java.awt.Color(51, 153, 255));
+        btnLimpar.setForeground(new java.awt.Color(255, 255, 255));
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-sync.png"))); // NOI18N
+        btnLimpar.setText("Limpar");
+        btnLimpar.setBorderPainted(false);
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -202,6 +214,8 @@ public class viewGrupos extends javax.swing.JFrame {
                 .addComponent(btnAlterar)
                 .addGap(40, 40, 40)
                 .addComponent(btnExcluir)
+                .addGap(37, 37, 37)
+                .addComponent(btnLimpar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -226,7 +240,8 @@ public class viewGrupos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInserir)
                     .addComponent(btnAlterar)
-                    .addComponent(btnExcluir))
+                    .addComponent(btnExcluir)
+                    .addComponent(btnLimpar))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -259,7 +274,8 @@ public class viewGrupos extends javax.swing.JFrame {
             {
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
             }    
-        }   
+        }
+        atualizarTabela();
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -284,8 +300,15 @@ public class viewGrupos extends javax.swing.JFrame {
         grupoController grupoCon = new grupoController();
         objGrupo = grupoCon.buscar(id);
         preencherCampos();
+        jcbStatus.setEnabled(false);
 //        System.out.println(id);
     }//GEN-LAST:event_jtbGruposMouseClicked
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        // TODO add your handling code here:
+        limparCampos();
+        jcbStatus.setEnabled(true);
+    }//GEN-LAST:event_btnLimparActionPerformed
 
     
     private void preencherCampos()
@@ -358,6 +381,7 @@ public class viewGrupos extends javax.swing.JFrame {
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnInserir;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
