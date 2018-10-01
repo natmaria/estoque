@@ -9,6 +9,7 @@ import estoque.ConnectionFactory;
 import java.awt.Color;
 import java.awt.Component;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import models.Grupo;
+import tools.formatacao;
 
 /**
  *
@@ -233,15 +235,16 @@ public class grupoController {
         }
     }
     
-    public boolean excluir()
+    public boolean inativar()
     {
     ConnectionFactory.abreConexao();
     Connection con = ConnectionFactory.getConnection();
     PreparedStatement stmt = null;
  
         try {
-            stmt = con.prepareStatement("UPDATE grupos SET status=2 WHERE id=?");
-            stmt.setInt(1, objGrupo.getId());
+            stmt = con.prepareStatement("UPDATE grupos SET status=2,dt_inativado=? WHERE id=?");
+            stmt.setDate(1,Date.valueOf(objGrupo.getDt_inativado()));
+            stmt.setInt(2, objGrupo.getId());
 
             stmt.executeUpdate();
 

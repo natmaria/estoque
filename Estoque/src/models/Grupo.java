@@ -14,7 +14,16 @@ public class Grupo {
    private String nome;
    private String info;
    private int status;
+   private String dt_inativado;
 
+    public String getDt_inativado() {
+        return dt_inativado;
+    }
+
+    public void setDt_inativado(String dt_inativado) {
+        this.dt_inativado = dt_inativado;
+    }
+   
     public int getId() {
         return id;
     }

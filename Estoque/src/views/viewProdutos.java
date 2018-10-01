@@ -5,29 +5,29 @@
  */
 package views;
 
-import controllers.grupoController;
+import controllers.produtoController;
 import estoque.CaixaDeDialogo;
 import estoque.Principal;
 import java.sql.SQLException;
-import models.Grupo;
+import models.Produto;
 import tools.Combos;
-import tools.formatacao;
 
 /**
  *
- * @author nmpetry
+ * @author nmp
  */
-public class viewGrupos extends javax.swing.JFrame {
+public class viewProdutos extends javax.swing.JFrame {
  Combos objComboStatus;
+ Combos objComboGrupos;
  int id;
- Grupo objGrupo;
+ Produto objProduto;
     /**
-     * Creates new form viewGrupos
+     * Creates new form viewProdutos
      */
-    public viewGrupos() {
+    public viewProdutos() {
         initComponents();
-        grupoController grupoCon = new grupoController(null, jtbGrupos);
-        grupoCon.preencherTabela();
+        produtoController produtoCon = new produtoController(null, jtbProdutos);
+        produtoCon.preencherTabela();
         btnAlterar.setEnabled(false);
         btnInativar.setEnabled(false);
         
@@ -35,6 +35,15 @@ public class viewGrupos extends javax.swing.JFrame {
         {
          objComboStatus = new Combos(jcbStatus);
          objComboStatus.PreencheCombo("SELECT id, nome FROM status ORDER BY nome",false);
+        }    
+        catch (SQLException e) 
+        {
+            System.out.println("Erro ao preencher combobox");
+        }
+        try 
+        {
+         objComboGrupos = new Combos(jcbGrupos);
+         objComboGrupos.PreencheCombo("SELECT id, nome FROM grupos WHERE status=1 ORDER BY nome",false);
         }    
         catch (SQLException e) 
         {
@@ -51,6 +60,14 @@ public class viewGrupos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtbProdutos = new javax.swing.JTable();
+        btnInserir = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
+        btnInativar = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
+        jcbInativos = new javax.swing.JCheckBox();
         lblTitulo = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
@@ -61,47 +78,17 @@ public class viewGrupos extends javax.swing.JFrame {
         lblInfo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaInfo = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jtbGrupos = new javax.swing.JTable();
-        btnInserir = new javax.swing.JButton();
-        btnAlterar = new javax.swing.JButton();
-        btnInativar = new javax.swing.JButton();
-        btnVoltar = new javax.swing.JButton();
-        btnLimpar = new javax.swing.JButton();
-        jcbInativos = new javax.swing.JCheckBox();
+        lblGrupo = new javax.swing.JLabel();
+        jcbGrupos = new javax.swing.JComboBox<String>();
+        lblQntdMin = new javax.swing.JLabel();
+        txtQntdMin = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(600, 600));
 
-        lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblTitulo.setForeground(new java.awt.Color(204, 0, 0));
-        lblTitulo.setText("Grupos");
-
-        lblId.setBackground(new java.awt.Color(204, 0, 0));
-        lblId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblId.setForeground(new java.awt.Color(204, 0, 0));
-        lblId.setText("ID:");
-
-        lblNome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblNome.setForeground(new java.awt.Color(204, 0, 0));
-        lblNome.setText("Nome:");
-
-        lblStatus.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblStatus.setForeground(new java.awt.Color(204, 0, 0));
-        lblStatus.setText("Status");
-
-        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        lblInfo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblInfo.setForeground(new java.awt.Color(204, 0, 0));
-        lblInfo.setText("Informações:");
-
-        jtaInfo.setColumns(20);
-        jtaInfo.setRows(5);
-        jScrollPane1.setViewportView(jtaInfo);
-
-        jtbGrupos.setModel(new javax.swing.table.DefaultTableModel(
+        jtbProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -112,12 +99,12 @@ public class viewGrupos extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jtbGrupos.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtbProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtbGruposMouseClicked(evt);
+                jtbProdutosMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jtbGrupos);
+        jScrollPane2.setViewportView(jtbProdutos);
 
         btnInserir.setBackground(new java.awt.Color(51, 153, 255));
         btnInserir.setForeground(new java.awt.Color(255, 255, 255));
@@ -178,6 +165,44 @@ public class viewGrupos extends javax.swing.JFrame {
         jcbInativos.setForeground(new java.awt.Color(204, 0, 0));
         jcbInativos.setText("Mostrar Inativos");
 
+        lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(204, 0, 0));
+        lblTitulo.setText("Produtos");
+
+        lblId.setBackground(new java.awt.Color(204, 0, 0));
+        lblId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblId.setForeground(new java.awt.Color(204, 0, 0));
+        lblId.setText("ID:");
+
+        lblNome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblNome.setForeground(new java.awt.Color(204, 0, 0));
+        lblNome.setText("Nome:");
+
+        lblStatus.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblStatus.setForeground(new java.awt.Color(204, 0, 0));
+        lblStatus.setText("Status");
+
+        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lblInfo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblInfo.setForeground(new java.awt.Color(204, 0, 0));
+        lblInfo.setText("Informações:");
+
+        jtaInfo.setColumns(20);
+        jtaInfo.setRows(5);
+        jScrollPane1.setViewportView(jtaInfo);
+
+        lblGrupo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblGrupo.setForeground(new java.awt.Color(204, 0, 0));
+        lblGrupo.setText("Grupo");
+
+        jcbGrupos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lblQntdMin.setBackground(new java.awt.Color(204, 0, 0));
+        lblQntdMin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblQntdMin.setForeground(new java.awt.Color(204, 0, 0));
+        lblQntdMin.setText("Quantidade mínima:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,15 +212,22 @@ public class viewGrupos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblStatus)
                             .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblGrupo)
+                            .addComponent(jcbGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblId)
-                                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtId))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lblId)
+                                        .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtId))
+                                    .addComponent(lblStatus))
                                 .addGap(41, 41, 41)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblQntdMin)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtQntdMin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(lblNome)
                                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(15, 15, 15)
@@ -241,12 +273,22 @@ public class viewGrupos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
-                        .addComponent(lblStatus)
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblStatus)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblQntdMin)
+                                    .addComponent(txtQntdMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(23, 23, 23)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addComponent(lblGrupo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInserir)
                     .addComponent(btnAlterar)
@@ -264,92 +306,24 @@ public class viewGrupos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtbProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbProdutosMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jtbProdutosMouseClicked
+
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         // TODO add your handling code here:
-        if (validarDados()==1)
-        {
-            guardarDados();
-            grupoController grupoCon = new grupoController(objGrupo); 
-            try
-            {
-            boolean inclusao = grupoCon.incluir();
-                if (inclusao ==true)
-                {
-                    atualizarTabela();
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo inserido com sucesso!", "Inserido", 'i');
-                }
-                else
-                {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir grupo.", "ERRO", 'e');
-                }
-            }
-            catch (Exception e)
-            {
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
-            }    
-        } else
-        {
-        if (validarDados()==2)
-        {
-           CaixaDeDialogo.obterinstancia().exibirMensagem("ID informado já existe!", "ID já existe!", 'e'); 
-        } else
-        {
-        if (validarDados()==3)
-        {
-           CaixaDeDialogo.obterinstancia().exibirMensagem("É necessário preencher todos os campos!", "Preencher campos!", 'e'); 
-        }
-        }
-        }
+
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
-        if (validarAlteracao()==true)
-        {
-            guardarDados();
-            grupoController grupoCon = new grupoController(objGrupo); 
-            try
-            {
-            boolean alteracao = grupoCon.alterar();
-                if (alteracao ==true)
-                {
-                    atualizarTabela();
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo alterado com sucesso!", "Alterado", 'i');
-                }
-                else
-                {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar grupo.", "ERRO", 'e');
-                }
-            }
-            catch (Exception e)
-            {
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
-            }    
-        }        
+
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnInativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInativarActionPerformed
         // TODO add your handling code here:
-            guardarDados();
-            objGrupo.setDt_inativado(formatacao.retornaDataAtual("yyyy-MM-dd"));
-            grupoController grupoCon = new grupoController(objGrupo); 
-            try
-            {
-            boolean inativacao = grupoCon.inativar();
-                if (inativacao ==true)
-                {
-                    atualizarTabela();
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo inativado com sucesso!", "Alterado", 'i');
-                }
-                else
-                {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao inativar grupo.", "ERRO", 'e');
-                }
-            }
-            catch (Exception e)
-            {
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
-            }    
+
     }//GEN-LAST:event_btnInativarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -359,22 +333,6 @@ public class viewGrupos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void jtbGruposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbGruposMouseClicked
-        // TODO add your handling code here:
-        int linha = jtbGrupos.getSelectedRow();
-        id = (int) jtbGrupos.getModel().getValueAt(linha, 0);
-        //        System.out.println(id);
-
-        grupoController grupoCon = new grupoController();
-        objGrupo = grupoCon.buscar(id);
-        preencherCampos(objGrupo);
-        
-        jcbStatus.setEnabled(false);
-        btnAlterar.setEnabled(true);
-        btnInativar.setEnabled(true);
-        txtId.setEditable(false);
-    }//GEN-LAST:event_jtbGruposMouseClicked
-
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // TODO add your handling code here:
         limparCampos();
@@ -383,93 +341,65 @@ public class viewGrupos extends javax.swing.JFrame {
         btnInativar.setEnabled(false);
     }//GEN-LAST:event_btnLimparActionPerformed
 
-    
-    private void preencherCampos(Grupo objGrupo)
-    {
-        txtId.setText(String.valueOf(objGrupo.getId()));
-        txtNome.setText(objGrupo.getNome());
-        objComboStatus.SetaComboBox(String.valueOf(objGrupo.getStatus()));
-        jtaInfo.setText(objGrupo.getInfo());
-    }
-    
-    private void limparCampos()
+    /**
+     * @param args the command line arguments
+     */
+
+        private void limparCampos()
     {
         txtId.setText("");
         txtNome.setText("");
         objComboStatus.SetaComboBox("");
         jtaInfo.setText("");
+        txtQntdMin.setText("");
+        objComboGrupos.SetaComboBox("");
         
         atualizarTabela();
     }
-    
-     private void atualizarTabela() 
+    private void atualizarTabela() 
     {
         try 
         {
-            grupoController grupoCon = new grupoController(null, jtbGrupos);
-            grupoCon.preencherTabela();
+            produtoController produtoCon = new produtoController(null, jtbProdutos);
+            produtoCon.preencherTabela();
 
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
         }
     }
-     
-    private int validarDados() 
+ 
+    private void preencherCampos(Produto objProduto)
     {
-        try {
-            grupoController grupoCon = new grupoController();
-           if ((txtId.getText().trim().length()>0) && (jtaInfo.getText().trim().length()>0) && (txtNome.getText().trim().length()>5) && 
-                   (grupoCon.validarId(Integer.parseInt(txtId.getText()))==true))
-            {
-            return 1;
-            } else
-           {
-               if ((grupoCon.validarId(Integer.parseInt(txtId.getText()))==false))
-               {
-                   return 2;
-               } else
-           {
-            return 3;
-           }
-           }
-        } 
-        catch (Exception ex) 
-        {
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
-            return 3;
-        }
-    }
-    
-    private boolean validarAlteracao()
-    {
-        if ((jtaInfo.getText().trim().length()>0) && (txtNome.getText().trim().length()>5))
-        {
-            return true;
-        } else 
-        {
-            return false;
-        }
+        txtId.setText(String.valueOf(objProduto.getId()));
+        txtNome.setText(objProduto.getNome());
+        jtaInfo.setText(objProduto.getInfo());
+        objComboStatus.SetaComboBox(String.valueOf(objProduto.getStatus()));
+        objComboGrupos.SetaComboBox(String.valueOf(objProduto.getGrupo()));
+        txtQntdMin.setText(String.valueOf(objProduto.getQntd_min()));
     }
     
     private void guardarDados() 
     {
         try 
         {
-            objGrupo = new Grupo();
-            objGrupo.setId(Integer.parseInt(txtId.getText()));
-            objGrupo.setNome(txtNome.getText());
-            objGrupo.setInfo(jtaInfo.getText());
+            objProduto = new Produto();
+            objProduto.setId(Integer.parseInt(txtId.getText()));
+            objProduto.setNome(txtNome.getText());
+            objProduto.setInfo(jtaInfo.getText());
 
             Combos c = (Combos) jcbStatus.getSelectedItem();
             String status = c.getCodigo();
-            objGrupo.setStatus(Integer.parseInt(status));
+            objProduto.setStatus(Integer.parseInt(status));
+            
+            Combos co = (Combos) jcbGrupos.getSelectedItem();
+            String grupo = co.getCodigo();
+            objProduto.setGrupo(Integer.parseInt(grupo));
         }
         catch(Exception ex)
         {
         CaixaDeDialogo.obterinstancia().exibirMensagem("Problemas no guardaDados: " + ex.getMessage());
         }
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnInativar;
@@ -478,16 +408,20 @@ public class viewGrupos extends javax.swing.JFrame {
     private javax.swing.JButton btnVoltar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JComboBox<String> jcbGrupos;
     private javax.swing.JCheckBox jcbInativos;
     private javax.swing.JComboBox<String> jcbStatus;
     private javax.swing.JTextArea jtaInfo;
-    private javax.swing.JTable jtbGrupos;
+    private javax.swing.JTable jtbProdutos;
+    private javax.swing.JLabel lblGrupo;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblInfo;
     private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblQntdMin;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtQntdMin;
     // End of variables declaration//GEN-END:variables
 }
