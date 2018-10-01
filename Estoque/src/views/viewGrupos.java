@@ -56,7 +56,7 @@ public class viewGrupos extends javax.swing.JFrame {
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lblStatus = new javax.swing.JLabel();
-        jcbStatus = new javax.swing.JComboBox<String>();
+        jcbStatus = new javax.swing.JComboBox<>();
         lblInfo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaInfo = new javax.swing.JTextArea();
@@ -81,8 +81,6 @@ public class viewGrupos extends javax.swing.JFrame {
         lblId.setForeground(new java.awt.Color(204, 0, 0));
         lblId.setText("ID:");
 
-        txtId.setEditable(false);
-
         lblNome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblNome.setForeground(new java.awt.Color(204, 0, 0));
         lblNome.setText("Nome:");
@@ -91,7 +89,7 @@ public class viewGrupos extends javax.swing.JFrame {
         lblStatus.setForeground(new java.awt.Color(204, 0, 0));
         lblStatus.setText("Status");
 
-        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lblInfo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblInfo.setForeground(new java.awt.Color(204, 0, 0));
@@ -182,19 +180,19 @@ public class viewGrupos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblId)
-                            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtId))
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNome)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblStatus)
-                            .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblId)
+                                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtId))
+                                .addGap(41, 41, 41)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNome)
+                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblInfo)
@@ -227,13 +225,16 @@ public class viewGrupos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblId)
                     .addComponent(lblNome)
-                    .addComponent(lblStatus)
                     .addComponent(lblInfo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
+                        .addComponent(lblStatus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
@@ -254,7 +255,7 @@ public class viewGrupos extends javax.swing.JFrame {
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         // TODO add your handling code here:
-        if (validarDados()==true)
+        if (validarDados()==1)
         {
             guardarDados();
             grupoController grupoCon = new grupoController(objGrupo); 
@@ -263,6 +264,7 @@ public class viewGrupos extends javax.swing.JFrame {
             boolean inclusao = grupoCon.incluir();
                 if (inclusao ==true)
                 {
+                    atualizarTabela();
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo inserido com sucesso!", "Inserido", 'i');
                 }
                 else
@@ -274,8 +276,19 @@ public class viewGrupos extends javax.swing.JFrame {
             {
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
             }    
+        } else
+        {
+        if (validarDados()==2)
+        {
+           CaixaDeDialogo.obterinstancia().exibirMensagem("ID informado já existe!", "ID já existe!", 'e'); 
+        } else
+        {
+        if (validarDados()==3)
+        {
+           CaixaDeDialogo.obterinstancia().exibirMensagem("É necessário preencher todos os campos!", "Preencher campos!", 'e'); 
         }
-        atualizarTabela();
+        }
+        }
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -299,8 +312,10 @@ public class viewGrupos extends javax.swing.JFrame {
         id = (int) jtbGrupos.getModel().getValueAt(linha, 0);
         grupoController grupoCon = new grupoController();
         objGrupo = grupoCon.buscar(id);
-        preencherCampos();
+        preencherCampos(objGrupo);
         jcbStatus.setEnabled(false);
+        btnAlterar.setEnabled(true);
+        btnExcluir.setEnabled(true);
 //        System.out.println(id);
     }//GEN-LAST:event_jtbGruposMouseClicked
 
@@ -308,10 +323,12 @@ public class viewGrupos extends javax.swing.JFrame {
         // TODO add your handling code here:
         limparCampos();
         jcbStatus.setEnabled(true);
+        btnAlterar.setEnabled(false);
+        btnExcluir.setEnabled(false);
     }//GEN-LAST:event_btnLimparActionPerformed
 
     
-    private void preencherCampos()
+    private void preencherCampos(Grupo objGrupo)
     {
         txtId.setText(String.valueOf(objGrupo.getId()));
         txtNome.setText(objGrupo.getNome());
@@ -341,21 +358,29 @@ public class viewGrupos extends javax.swing.JFrame {
         }
     }
      
-    private boolean validarDados() 
+    private int validarDados() 
     {
         try {
-
-           if ((jtaInfo.getText().trim().length()>0) && (txtNome.getText().trim().length()>5))
+            grupoController grupoCon = new grupoController();
+           if ((txtId.getText().trim().length()>0) && (jtaInfo.getText().trim().length()>0) && (txtNome.getText().trim().length()>5) && 
+                   (grupoCon.validarId(Integer.parseInt(txtId.getText()))==true))
             {
-            return true;
-            }
-           else
+            return 1;
+            } else
            {
-               return false;
+               if ((grupoCon.validarId(Integer.parseInt(txtId.getText()))==false))
+               {
+                   return 2;
+               } else
+           {
+            return 3;
            }
-        } catch (Exception ex) {
+           }
+        } 
+        catch (Exception ex) 
+        {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
-            return false;
+            return 3;
         }
     }
     
@@ -364,6 +389,7 @@ public class viewGrupos extends javax.swing.JFrame {
         try 
         {
             objGrupo = new Grupo();
+            objGrupo.setId(Integer.parseInt(txtId.getText()));
             objGrupo.setNome(txtNome.getText());
             objGrupo.setInfo(jtaInfo.getText());
 

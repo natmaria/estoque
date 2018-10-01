@@ -57,11 +57,11 @@ public class grupoController {
         try
         {
             String SQL = "";
-            SQL = " SELECT id,nome,info,s.nome  ";
+            SQL = " SELECT g.id,g.nome,g.info,s.nome  ";
             SQL+=" FROM grupos g, status s ";
             SQL+=" WHERE g.status=s.id ";
-            SQL+=" WHERE g.status=1 ";
-            SQL+= " ORDER BY nome ";
+            SQL+=" AND g.status=1 ";
+            SQL+= " ORDER BY g.nome ";
             result = ConnectionFactory.stmt.executeQuery(SQL);
             
             while (result.next())
@@ -147,7 +147,7 @@ public class grupoController {
             String SQL = "";
             SQL = " SELECT id,nome,info,status ";
             SQL += " FROM grupos ";
-            SQL += " WHERE g.id = '" + id + "'";
+            SQL += " WHERE id = '" + id + "'";
             //stm.executeQuery(SQL);  
         
             try {
@@ -189,10 +189,11 @@ public class grupoController {
         
         try 
         {
-            stmt = con.prepareStatement("INSERT INTO grupos (nome, info, status)VALUES(?,?,?)");
-            stmt.setString(1, objGrupo.getNome());
-            stmt.setString(2, objGrupo.getInfo());
-            stmt.setInt(3, objGrupo.getStatus());
+            stmt = con.prepareStatement("INSERT INTO grupos (id, nome, info, status)VALUES(?,?,?,?)");
+            stmt.setInt(1,objGrupo.getId());
+            stmt.setString(2, objGrupo.getNome());
+            stmt.setString(3, objGrupo.getInfo());
+            stmt.setInt(4, objGrupo.getStatus());
             
             stmt.executeUpdate();
             
@@ -229,6 +230,38 @@ public class grupoController {
             return false;
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    
+    public boolean validarId(int id)
+    {
+    ConnectionFactory.abreConexao();
+    Connection con = ConnectionFactory.getConnection();
+    PreparedStatement stmt = null;  
+    
+    try 
+    {
+        ResultSet result = null;
+            String SQL = "";
+            SQL = " SELECT id  ";
+            SQL+=" FROM grupos ";
+            SQL += " WHERE id = '" + id + "'";
+            result = ConnectionFactory.stmt.executeQuery(SQL);
+            
+            if (result.next() == true) 
+            {
+            return false;
+            }    
+            else
+            {
+              return true;
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Problema ao buscar ID");
+            System.out.println(e);    
+            return false;
         }
     }
 }
