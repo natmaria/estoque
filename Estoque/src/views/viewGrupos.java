@@ -67,6 +67,7 @@ public class viewGrupos extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
+        jcbInativos = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -172,6 +173,10 @@ public class viewGrupos extends javax.swing.JFrame {
             }
         });
 
+        jcbInativos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jcbInativos.setForeground(new java.awt.Color(204, 0, 0));
+        jcbInativos.setText("Mostrar Inativos");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -200,8 +205,11 @@ public class viewGrupos extends javax.swing.JFrame {
                             .addComponent(jScrollPane1)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnVoltar)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jcbInativos)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnVoltar))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 14, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -246,7 +254,9 @@ public class viewGrupos extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVoltar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnVoltar)
+                    .addComponent(jcbInativos))
                 .addGap(9, 9, 9))
         );
 
@@ -293,6 +303,28 @@ public class viewGrupos extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
+        if (validarAlteracao()==true)
+        {
+            guardarDados();
+            grupoController grupoCon = new grupoController(objGrupo); 
+            try
+            {
+            boolean alteracao = grupoCon.alterar();
+                if (alteracao ==true)
+                {
+                    atualizarTabela();
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo alterado com sucesso!", "Alterado", 'i');
+                }
+                else
+                {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar grupo.", "ERRO", 'e');
+                }
+            }
+            catch (Exception e)
+            {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
+            }    
+        }        
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -310,13 +342,16 @@ public class viewGrupos extends javax.swing.JFrame {
         // TODO add your handling code here:
         int linha = jtbGrupos.getSelectedRow();
         id = (int) jtbGrupos.getModel().getValueAt(linha, 0);
+        //        System.out.println(id);
+
         grupoController grupoCon = new grupoController();
         objGrupo = grupoCon.buscar(id);
         preencherCampos(objGrupo);
+        
         jcbStatus.setEnabled(false);
         btnAlterar.setEnabled(true);
         btnExcluir.setEnabled(true);
-//        System.out.println(id);
+        txtId.setEditable(false);
     }//GEN-LAST:event_jtbGruposMouseClicked
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
@@ -384,6 +419,17 @@ public class viewGrupos extends javax.swing.JFrame {
         }
     }
     
+    private boolean validarAlteracao()
+    {
+        if ((jtaInfo.getText().trim().length()>0) && (txtNome.getText().trim().length()>5))
+        {
+            return true;
+        } else 
+        {
+            return false;
+        }
+    }
+    
     private void guardarDados() 
     {
         try 
@@ -411,6 +457,7 @@ public class viewGrupos extends javax.swing.JFrame {
     private javax.swing.JButton btnVoltar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JCheckBox jcbInativos;
     private javax.swing.JComboBox<String> jcbStatus;
     private javax.swing.JTextArea jtaInfo;
     private javax.swing.JTable jtbGrupos;

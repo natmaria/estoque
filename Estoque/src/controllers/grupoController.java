@@ -219,7 +219,7 @@ public class grupoController {
             stmt = con.prepareStatement("UPDATE grupos SET nome=?, info=? WHERE id=?");
             stmt.setString(1, objGrupo.getNome());
             stmt.setString(2, objGrupo.getInfo());
-            stmt.setInt(4, objGrupo.getId());
+            stmt.setInt(3, objGrupo.getId());
 
             stmt.executeUpdate();
 
@@ -231,6 +231,28 @@ public class grupoController {
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
+    }
+    
+    public boolean excluir()
+    {
+    ConnectionFactory.abreConexao();
+    Connection con = ConnectionFactory.getConnection();
+    PreparedStatement stmt = null;
+ 
+        try {
+            stmt = con.prepareStatement("UPDATE grupos SET status=2 WHERE id=?");
+            stmt.setInt(1, objGrupo.getId());
+
+            stmt.executeUpdate();
+
+            return true;
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }    
     }
     
     public boolean validarId(int id)
