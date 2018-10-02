@@ -99,7 +99,6 @@
           <Image iconType="3" name="/icons/grupos.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Grupos"/>
-        <Property name="actionCommand" type="java.lang.String" value=""/>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[250, 210]"/>

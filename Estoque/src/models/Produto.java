@@ -17,6 +17,23 @@ public class Produto {
    private int qntd_min;
    private int status;
    private String data_add;
+   private String dt_inativado;
+
+    public String getData_add() {
+        return data_add;
+    }
+
+    public void setData_add(String data_add) {
+        this.data_add = data_add;
+    }
+
+    public String getDt_inativado() {
+        return dt_inativado;
+    }
+
+    public void setDt_inativado(String dt_inativado) {
+        this.dt_inativado = dt_inativado;
+    }
 
     public int getId() {
         return id;

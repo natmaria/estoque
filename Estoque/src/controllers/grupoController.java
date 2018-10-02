@@ -45,7 +45,7 @@ public class grupoController {
        
       }
       
-      public void preencherTabela(int type) 
+      public void preencherTabela(int type,int busca, String nome) 
       {
         ConnectionFactory.abreConexao();
         Vector<String> cabecalhos = new Vector<String>();
@@ -58,38 +58,75 @@ public class grupoController {
         ResultSet result = null;
         if (type==2)
         {
-        try
-        {
-            String SQL = "";
-            SQL = " SELECT g.id,g.nome,g.info,s.nome  ";
-            SQL+=" FROM grupos g, status s ";
-            SQL+=" WHERE g.status=s.id ";
-            SQL+=" AND g.status=1 ";
-            SQL+= " ORDER BY g.nome ";
-            result = ConnectionFactory.stmt.executeQuery(SQL);
-        }   
-          catch (SQLException e) 
-        {
-            System.out.println("Problema ao popular tabela");
-            System.out.println(e);
+            if (busca==0)
+            {
+                try 
+                {
+                    String SQL = "";
+                    SQL = " SELECT g.id,g.nome,g.info,s.nome  ";
+                    SQL += " FROM grupos g, status s ";
+                    SQL += " WHERE g.status=s.id ";
+                    SQL += " AND g.status=1 ";
+                    SQL += " ORDER BY g.nome ";
+                    result = ConnectionFactory.stmt.executeQuery(SQL);
+                } catch (SQLException e) {
+                    System.out.println("Problema ao popular tabela");
+                    System.out.println(e);
+                }
+            }
+            else
+            {
+                try
+                {
+                    String SQL = "";
+                    SQL = " SELECT g.id,g.nome,g.info,s.nome  ";
+                    SQL += " FROM grupos g, status s ";
+                    SQL += " WHERE g.status=s.id ";
+                    SQL += " AND g.status=1 ";
+                    SQL += " AND g.nome LIKE '%" + nome + "%'";
+                    SQL += " ORDER BY g.nome ";
+                    result = ConnectionFactory.stmt.executeQuery(SQL);
+                } catch (SQLException e) {
+                    System.out.println("Problema ao popular tabela");
+                    System.out.println(e);
+                } 
+            }
         }
-        }
-        if (type==1)
+        else
         {
-                   try
-        {
-            String SQL = "";
-            SQL = " SELECT g.id,g.nome,g.info,s.nome  ";
-            SQL+=" FROM grupos g, status s ";
-            SQL+=" WHERE g.status=s.id ";
-            SQL+= " ORDER BY g.nome ";
-            result = ConnectionFactory.stmt.executeQuery(SQL);
-        }   
-          catch (SQLException e) 
-        {
-            System.out.println("Problema ao popular tabela");
-            System.out.println(e);
-        }
+            if (type == 1) 
+            {
+                if (busca==0)
+                {
+                try {
+                    String SQL = "";
+                    SQL = " SELECT g.id,g.nome,g.info,s.nome  ";
+                    SQL += " FROM grupos g, status s ";
+                    SQL += " WHERE g.status=s.id ";
+                    SQL += " ORDER BY g.nome ";
+                    result = ConnectionFactory.stmt.executeQuery(SQL);
+                } catch (SQLException e) {
+                    System.out.println("Problema ao popular tabela");
+                    System.out.println(e);
+                }
+                }
+                else
+                {
+                    try 
+                    {
+                        String SQL = "";
+                        SQL = " SELECT g.id,g.nome,g.info,s.nome  ";
+                        SQL += " FROM grupos g, status s ";
+                        SQL += " WHERE g.status=s.id ";
+                        SQL += " AND g.nome LIKE '%" + nome + "%'";
+                        SQL += " ORDER BY g.nome ";
+                        result = ConnectionFactory.stmt.executeQuery(SQL);
+                    } catch (SQLException e) {
+                        System.out.println("Problema ao popular tabela");
+                        System.out.println(e);
+                    }
+                }
+            }
         }
         try
         {
@@ -133,7 +170,7 @@ public class grupoController {
                     column.setPreferredWidth(10);
                     break;
                 case 1:
-                    column.setPreferredWidth(120);
+                    column.setPreferredWidth(150);
                     break;
                 case 2:
                     column.setPreferredWidth(300);
@@ -218,11 +255,11 @@ public class grupoController {
         
         try 
         {
-            stmt = con.prepareStatement("INSERT INTO grupos (id, nome, info, status)VALUES(?,?,?,?)");
-            stmt.setInt(1,objGrupo.getId());
-            stmt.setString(2, objGrupo.getNome());
-            stmt.setString(3, objGrupo.getInfo());
-            stmt.setInt(4, objGrupo.getStatus());
+            stmt = con.prepareStatement("INSERT INTO grupos (nome, info, status)VALUES(?,?,?)");
+//            stmt.setInt(1,objGrupo.getId());
+            stmt.setString(1, objGrupo.getNome());
+            stmt.setString(2, objGrupo.getInfo());
+            stmt.setInt(3, objGrupo.getStatus());
             
             stmt.executeUpdate();
             
@@ -308,35 +345,35 @@ public class grupoController {
         }    
     }
         
-    public boolean validarId(int id)
-    {
-    ConnectionFactory.abreConexao();
-    Connection con = ConnectionFactory.getConnection();
-    PreparedStatement stmt = null;  
-    
-    try 
-    {
-        ResultSet result = null;
-            String SQL = "";
-            SQL = " SELECT id  ";
-            SQL+=" FROM grupos ";
-            SQL += " WHERE id = '" + id + "'";
-            result = ConnectionFactory.stmt.executeQuery(SQL);
-            
-            if (result.next() == true) 
-            {
-            return false;
-            }    
-            else
-            {
-              return true;
-            }
-        }
-        catch (SQLException e)
-        {
-            System.out.println("Problema ao buscar ID");
-            System.out.println(e);    
-            return false;
-        }
-    }
+//    public boolean validarId(int id)
+//    {
+//    ConnectionFactory.abreConexao();
+//    Connection con = ConnectionFactory.getConnection();
+//    PreparedStatement stmt = null;  
+//    
+//    try 
+//    {
+//        ResultSet result = null;
+//            String SQL = "";
+//            SQL = " SELECT id  ";
+//            SQL+=" FROM grupos ";
+//            SQL += " WHERE id = '" + id + "'";
+//            result = ConnectionFactory.stmt.executeQuery(SQL);
+//            
+//            if (result.next() == true) 
+//            {
+//            return false;
+//            }    
+//            else
+//            {
+//              return true;
+//            }
+//        }
+//        catch (SQLException e)
+//        {
+//            System.out.println("Problema ao buscar ID");
+//            System.out.println(e);    
+//            return false;
+//        }
+//    }
 }
