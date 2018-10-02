@@ -21,13 +21,14 @@ public class viewGrupos extends javax.swing.JFrame {
  Combos objComboStatus;
  int id;
  Grupo objGrupo;
+ int type;
     /**
      * Creates new form viewGrupos
      */
     public viewGrupos() {
         initComponents();
         grupoController grupoCon = new grupoController(null, jtbGrupos);
-        grupoCon.preencherTabela();
+        grupoCon.preencherTabela(2);
         btnAlterar.setEnabled(false);
         btnInativar.setEnabled(false);
         
@@ -69,6 +70,7 @@ public class viewGrupos extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         jcbInativos = new javax.swing.JCheckBox();
+        btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -177,6 +179,22 @@ public class viewGrupos extends javax.swing.JFrame {
         jcbInativos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jcbInativos.setForeground(new java.awt.Color(204, 0, 0));
         jcbInativos.setText("Mostrar Inativos");
+        jcbInativos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbInativosActionPerformed(evt);
+            }
+        });
+
+        btnExcluir.setBackground(new java.awt.Color(51, 153, 255));
+        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-error.png"))); // NOI18N
+        btnExcluir.setText("Excluir");
+        btnExcluir.setBorderPainted(false);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,18 +230,19 @@ public class viewGrupos extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnVoltar))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 14, Short.MAX_VALUE)))
+                        .addGap(0, 14, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnInserir)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAlterar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnInativar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLimpar)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnInserir)
-                .addGap(41, 41, 41)
-                .addComponent(btnAlterar)
-                .addGap(40, 40, 40)
-                .addComponent(btnInativar)
-                .addGap(37, 37, 37)
-                .addComponent(btnLimpar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,7 +270,8 @@ public class viewGrupos extends javax.swing.JFrame {
                     .addComponent(btnInserir)
                     .addComponent(btnAlterar)
                     .addComponent(btnInativar)
-                    .addComponent(btnLimpar))
+                    .addComponent(btnLimpar)
+                    .addComponent(btnExcluir))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -275,7 +295,8 @@ public class viewGrupos extends javax.swing.JFrame {
             boolean inclusao = grupoCon.incluir();
                 if (inclusao ==true)
                 {
-                    atualizarTabela();
+                    type=checkboxInativar();
+                    atualizarTabela(type);
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo inserido com sucesso!", "Inserido", 'i');
                 }
                 else
@@ -313,7 +334,8 @@ public class viewGrupos extends javax.swing.JFrame {
             boolean alteracao = grupoCon.alterar();
                 if (alteracao ==true)
                 {
-                    atualizarTabela();
+                    type=checkboxInativar();
+                    atualizarTabela(type);
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo alterado com sucesso!", "Alterado", 'i');
                 }
                 else
@@ -338,8 +360,9 @@ public class viewGrupos extends javax.swing.JFrame {
             boolean inativacao = grupoCon.inativar();
                 if (inativacao ==true)
                 {
-                    atualizarTabela();
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo inativado com sucesso!", "Alterado", 'i');
+                    type=checkboxInativar();
+                    atualizarTabela(type);
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo inativado com sucesso!", "Inativado", 'i');
                 }
                 else
                 {
@@ -369,7 +392,16 @@ public class viewGrupos extends javax.swing.JFrame {
         objGrupo = grupoCon.buscar(id);
         preencherCampos(objGrupo);
         
+        Combos c = (Combos) jcbStatus.getSelectedItem();
+        String status = c.getCodigo();
+        if (status.equals("1"))
+        {
         jcbStatus.setEnabled(false);
+        }
+        else
+        {
+        jcbStatus.setEnabled(true);  
+        }
         btnAlterar.setEnabled(true);
         btnInativar.setEnabled(true);
         txtId.setEditable(false);
@@ -382,6 +414,35 @@ public class viewGrupos extends javax.swing.JFrame {
         btnAlterar.setEnabled(false);
         btnInativar.setEnabled(false);
     }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void jcbInativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbInativosActionPerformed
+        // TODO add your handling code here:
+       checkboxInativar();
+    }//GEN-LAST:event_jcbInativosActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+            guardarDados();
+            grupoController grupoCon = new grupoController(objGrupo); 
+            try
+            {
+            boolean exclusao = grupoCon.excluir();
+                if (exclusao ==true)
+                {
+                    type=checkboxInativar();
+                    atualizarTabela(type);
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo excluído com sucesso!", "Excluído", 'i');
+                }
+                else
+                {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao excluir grupo.", "ERRO", 'e');
+                }
+            }
+            catch (Exception e)
+            {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
+            }    
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     
     private void preencherCampos(Grupo objGrupo)
@@ -398,16 +459,16 @@ public class viewGrupos extends javax.swing.JFrame {
         txtNome.setText("");
         objComboStatus.SetaComboBox("");
         jtaInfo.setText("");
-        
-        atualizarTabela();
+        type=checkboxInativar();
+        atualizarTabela(type);
     }
     
-     private void atualizarTabela() 
+     private void atualizarTabela(int type) 
     {
         try 
         {
             grupoController grupoCon = new grupoController(null, jtbGrupos);
-            grupoCon.preencherTabela();
+            grupoCon.preencherTabela(type);
 
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
@@ -470,8 +531,20 @@ public class viewGrupos extends javax.swing.JFrame {
         }
     }
     
+    public int checkboxInativar()
+    {
+        if (jcbInativos.isSelected())
+        {
+           return 1;
+        }
+        else
+        {
+            return 2;
+        }   
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnInativar;
     private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnLimpar;

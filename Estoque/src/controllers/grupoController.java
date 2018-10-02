@@ -45,7 +45,7 @@ public class grupoController {
        
       }
       
-      public void preencherTabela() 
+      public void preencherTabela(int type) 
       {
         ConnectionFactory.abreConexao();
         Vector<String> cabecalhos = new Vector<String>();
@@ -56,6 +56,8 @@ public class grupoController {
         cabecalhos.add("Status");
         
         ResultSet result = null;
+        if (type==2)
+        {
         try
         {
             String SQL = "";
@@ -65,7 +67,32 @@ public class grupoController {
             SQL+=" AND g.status=1 ";
             SQL+= " ORDER BY g.nome ";
             result = ConnectionFactory.stmt.executeQuery(SQL);
-            
+        }   
+          catch (SQLException e) 
+        {
+            System.out.println("Problema ao popular tabela");
+            System.out.println(e);
+        }
+        }
+        if (type==1)
+        {
+                   try
+        {
+            String SQL = "";
+            SQL = " SELECT g.id,g.nome,g.info,s.nome  ";
+            SQL+=" FROM grupos g, status s ";
+            SQL+=" WHERE g.status=s.id ";
+            SQL+= " ORDER BY g.nome ";
+            result = ConnectionFactory.stmt.executeQuery(SQL);
+        }   
+          catch (SQLException e) 
+        {
+            System.out.println("Problema ao popular tabela");
+            System.out.println(e);
+        }
+        }
+        try
+        {
             while (result.next())
             {
               Vector<Object> linha = new Vector<Object>();
@@ -218,10 +245,11 @@ public class grupoController {
     PreparedStatement stmt = null;
  
         try {
-            stmt = con.prepareStatement("UPDATE grupos SET nome=?, info=? WHERE id=?");
+            stmt = con.prepareStatement("UPDATE grupos SET nome=?, info=?, status=? WHERE id=?");
             stmt.setString(1, objGrupo.getNome());
             stmt.setString(2, objGrupo.getInfo());
-            stmt.setInt(3, objGrupo.getId());
+            stmt.setInt(3, objGrupo.getStatus());
+            stmt.setInt(4, objGrupo.getId());
 
             stmt.executeUpdate();
 
@@ -258,6 +286,28 @@ public class grupoController {
         }    
     }
     
+    public boolean excluir()
+    {
+    ConnectionFactory.abreConexao();
+    Connection con = ConnectionFactory.getConnection();
+    PreparedStatement stmt = null;
+ 
+        try {
+            stmt = con.prepareStatement("DELETE FROM grupos WHERE id=?");
+            stmt.setInt(1, objGrupo.getId());
+
+            stmt.executeUpdate();
+
+            return true;
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }    
+    }
+        
     public boolean validarId(int id)
     {
     ConnectionFactory.abreConexao();
