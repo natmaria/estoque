@@ -120,7 +120,7 @@ public class grupoController {
                         SQL = " SELECT g.id,g.nome,g.info,s.nome  ";
                         SQL += " FROM grupos g, status s ";
                         SQL += " WHERE g.status=s.id ";
-                        SQL += " AND g.nome LIKE '%" + nome + "%'";
+                        SQL += " AND LOWER(g.nome) LIKE '%" + nome.toLowerCase() + "%'";
                         SQL += " ORDER BY g.nome ";
                         result = ConnectionFactory.stmt.executeQuery(SQL);
                     } catch (SQLException e) {

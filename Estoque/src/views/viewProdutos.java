@@ -79,12 +79,12 @@ public class viewProdutos extends javax.swing.JFrame {
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lblStatus = new javax.swing.JLabel();
-        jcbStatus = new javax.swing.JComboBox<>();
+        jcbStatus = new javax.swing.JComboBox<String>();
         lblInfo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaInfo = new javax.swing.JTextArea();
         lblGrupo = new javax.swing.JLabel();
-        jcbGrupos = new javax.swing.JComboBox<>();
+        jcbGrupos = new javax.swing.JComboBox<String>();
         lblQntdMin = new javax.swing.JLabel();
         txtQntdMin = new javax.swing.JTextField();
         btnExcluir = new javax.swing.JButton();
@@ -173,6 +173,11 @@ public class viewProdutos extends javax.swing.JFrame {
         jcbInativos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jcbInativos.setForeground(new java.awt.Color(204, 0, 0));
         jcbInativos.setText("Mostrar Inativos");
+        jcbInativos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbInativosActionPerformed(evt);
+            }
+        });
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(204, 0, 0));
@@ -193,7 +198,7 @@ public class viewProdutos extends javax.swing.JFrame {
         lblStatus.setForeground(new java.awt.Color(204, 0, 0));
         lblStatus.setText("Status");
 
-        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lblInfo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblInfo.setForeground(new java.awt.Color(204, 0, 0));
@@ -207,7 +212,7 @@ public class viewProdutos extends javax.swing.JFrame {
         lblGrupo.setForeground(new java.awt.Color(204, 0, 0));
         lblGrupo.setText("Grupo");
 
-        jcbGrupos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbGrupos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lblQntdMin.setBackground(new java.awt.Color(204, 0, 0));
         lblQntdMin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -393,17 +398,87 @@ public class viewProdutos extends javax.swing.JFrame {
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         // TODO add your handling code here:
-
+        if (validarDados()==true)
+        {
+            guardarInclusao();
+            produtoController produtoCon = new produtoController(objProduto); 
+            try
+            {
+            boolean inclusao = produtoCon.incluir();
+                if (inclusao ==true)
+                {
+                    type=checkboxInativar();
+                    atualizarTabela(type);
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Produto inserido com sucesso!", "Inserido", 'i');
+                }
+                else
+                {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir produto.", "ERRO", 'e');
+                }
+            }
+            catch (Exception e)
+            {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
+            }    
+        } else
+        {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("É necessário preencher todos os campos!", "Preencher campos!", 'e');
+        }
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
-
+        if (validarDados()==true)
+        {
+            guardarDados();
+            produtoController produtoCon = new produtoController(objProduto); 
+            try
+            {
+            boolean alteracao = produtoCon.alterar();
+                if (alteracao ==true)
+                {
+                    type=checkboxInativar();
+                    atualizarTabela(type);
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Produto alterado com sucesso!", "Alterado", 'i');
+                }
+                else
+                {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar produto.", "ERRO", 'e');
+                }
+            }
+            catch (Exception e)
+            {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
+            }    
+        } else
+        {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("É necessário preencher todos os campos!", "Preencher campos!", 'e');
+        }        
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnInativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInativarActionPerformed
         // TODO add your handling code here:
-
+            guardarDados();
+            objProduto.setDt_inativado(formatacao.retornaDataAtual("yyyy-MM-dd"));
+            produtoController produtoCon = new produtoController(objProduto); 
+            try
+            {
+            boolean inativacao = produtoCon.inativar();
+                if (inativacao ==true)
+                {
+                    type=checkboxInativar();
+                    atualizarTabela(type);
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Produto inativado com sucesso!", "Inativado", 'i');
+                }
+                else
+                {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao inativar produto.", "ERRO", 'e');
+                }
+            }
+            catch (Exception e)
+            {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
+            }                           
     }//GEN-LAST:event_btnInativarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -421,13 +496,41 @@ public class viewProdutos extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
+            guardarDados();
+            produtoController produtoCon = new produtoController(objProduto); 
+            boolean escolha= CaixaDeDialogo.obterinstancia().pedirConfirmacao("Tem certeza que deseja excluir o produto?", 
+                            "Excluir?", 'p');
+            if (escolha==true)
+            {
+                try {
+                    boolean exclusao = produtoCon.excluir();
+                    if (exclusao == true) {
+                        type = checkboxInativar();
+                        atualizarTabela(type);
+                        limparCampos();
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Produto excluído com sucesso!", "Excluído", 'i');
 
+                    } else {
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao excluir grupo.", "ERRO", 'e');
+                    }
+                } catch (Exception e) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
+                }
+            }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
         // TODO add your handling code here:
-
+        produtoController produtoCon = new produtoController(null, jtbProdutos);
+        type=checkboxInativar();
+        produtoCon.preencherTabela(type,1,txtBusca.getText());
     }//GEN-LAST:event_btnBuscaActionPerformed
+
+    private void jcbInativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbInativosActionPerformed
+        // TODO add your handling code here:
+        type =checkboxInativar();
+        atualizarTabela(type);
+    }//GEN-LAST:event_jcbInativosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -480,7 +583,7 @@ public class viewProdutos extends javax.swing.JFrame {
         try {
             produtoController produtoCon = new produtoController();
            if ((jtaInfo.getText().trim().length()>0) && (txtNome.getText().trim().length()>5) && 
-                   (txtQntdMin.getText().trim().length()!=0))
+                   (txtQntdMin.getText().trim().length()!=0) && (txtDataAdd.getText().trim().length()==8))
             {
             return true;
             } else

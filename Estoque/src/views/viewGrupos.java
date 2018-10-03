@@ -364,6 +364,9 @@ public class viewGrupos extends javax.swing.JFrame {
             {
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
             }    
+        } else
+        {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("É necessário preencher todos os campos!", "Preencher campos!", 'e');
         }        
     }//GEN-LAST:event_btnAlterarActionPerformed
 

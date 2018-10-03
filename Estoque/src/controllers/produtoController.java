@@ -8,6 +8,9 @@ package controllers;
 import estoque.ConnectionFactory;
 import java.awt.Color;
 import java.awt.Component;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -21,16 +24,23 @@ import models.Produto;
  *
  * @author nmp
  */
-public class produtoController {
+public class produtoController 
+{
 
     static Produto objProduto;
     JTable jtbProdutos = null;
 
-    public produtoController(Produto objProduto, JTable jtbProdutos) {
+    public produtoController(Produto objProduto, JTable jtbProdutos) 
+    {
         this.objProduto = objProduto;
         this.jtbProdutos = jtbProdutos;
     }
 
+    public produtoController(Produto objProduto) 
+    {
+        this.objProduto=objProduto;
+    }
+      
     public produtoController() {
 
     }
@@ -74,7 +84,7 @@ public class produtoController {
                     SQL += " FROM produtos p,status s ";
                     SQL += " WHERE p.status=s.id ";
                     SQL += " AND p.status=1 ";
-                    SQL += " AND p.nome LIKE '%" + nome + "%'";
+                    SQL += " AND LOWER(p.nome) LIKE '%" + nome.toLowerCase() + "%'";
                     SQL += " ORDER BY p.nome ";
                     result = ConnectionFactory.stmt.executeQuery(SQL);
                 } 
@@ -112,7 +122,7 @@ public class produtoController {
                         SQL = " SELECT p.id,p.nome,p.info,p.qntd_min,s.nome  ";
                         SQL += " FROM produtos p,status s ";
                         SQL += " WHERE p.status=s.id ";
-                        SQL += " AND p.nome LIKE '%" + nome + "%'";
+                        SQL += " AND LOWER(p.nome) LIKE '%" + nome.toLowerCase() + "%'";
                         SQL += " ORDER BY p.nome ";
                         result = ConnectionFactory.stmt.executeQuery(SQL);   
                     }
@@ -202,7 +212,7 @@ public class produtoController {
 
             String SQL = "";
             SQL = " SELECT id,nome,info,id_grupo,qntd_min,status,dt_add  ";
-            SQL += " FROM grupos ";
+            SQL += " FROM produtos ";
             SQL += " WHERE id = '" + id + "'";
             //stm.executeQuery(SQL);  
         
@@ -239,6 +249,125 @@ public class produtoController {
     return objProduto;
     }
     
-    
-    
+    public boolean incluir()
+    {
+        
+        ConnectionFactory.abreConexao();
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try 
+        {
+            stmt = con.prepareStatement("INSERT INTO produtos (nome, info, id_grupo, qntd_min, status, dt_add)VALUES(?,?,?,?,?,?)");
+//            stmt.setInt(1,objGrupo.getId());
+            stmt.setString(1, objProduto.getNome());
+            stmt.setString(2, objProduto.getInfo());
+            stmt.setInt(3, objProduto.getGrupo());
+            stmt.setInt(4, objProduto.getQntd_min());
+            stmt.setInt(5, objProduto.getStatus());
+            stmt.setDate(6, Date.valueOf(objProduto.getData_add()));
+            
+            stmt.executeUpdate();
+            
+            return true;
+            
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println(ex.getMessage());
+            return false;
         }
+        finally
+        {
+            ConnectionFactory.closeConnection(con, stmt);
+        }   
+        
+    }
+    
+    public boolean alterar()
+    {
+ 
+    ConnectionFactory.abreConexao();
+    Connection con = ConnectionFactory.getConnection();
+    PreparedStatement stmt = null;
+ 
+        try 
+        {
+            stmt = con.prepareStatement("UPDATE produtos SET nome=?, info=?, id_grupo=?, qntd_min=?, status=?, dt_add=? WHERE id=?");
+            stmt.setString(1, objProduto.getNome());
+            stmt.setString(2, objProduto.getInfo());
+            stmt.setInt(3, objProduto.getGrupo());
+            stmt.setInt(4, objProduto.getQntd_min());
+            stmt.setInt(5, objProduto.getStatus());
+            stmt.setDate(4, Date.valueOf(objProduto.getData_add()));
+
+            stmt.executeUpdate();
+
+            return true;
+
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println(ex.getMessage());
+            return false;
+        } 
+        finally 
+        {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    
+    public boolean inativar()
+    {
+    ConnectionFactory.abreConexao();
+    Connection con = ConnectionFactory.getConnection();
+    PreparedStatement stmt = null;
+ 
+        try 
+        {
+            stmt = con.prepareStatement("UPDATE produtos SET status=2,dt_inativado=? WHERE id=?");
+            stmt.setDate(1,Date.valueOf(objProduto.getDt_inativado()));
+            stmt.setInt(2, objProduto.getId());
+
+            stmt.executeUpdate();
+
+            return true;
+
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println(ex.getMessage());
+            return false;
+        } 
+        finally 
+        {
+            ConnectionFactory.closeConnection(con, stmt);
+        }    
+    }
+    
+    public boolean excluir()
+    {
+    ConnectionFactory.abreConexao();
+    Connection con = ConnectionFactory.getConnection();
+    PreparedStatement stmt = null;
+ 
+        try {
+            stmt = con.prepareStatement("DELETE FROM produtos WHERE id=?");
+            stmt.setInt(1, objProduto.getId());
+
+            stmt.executeUpdate();
+
+            return true;
+
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println(ex.getMessage());
+            return false;
+        } 
+        finally 
+        {
+            ConnectionFactory.closeConnection(con, stmt);
+        }    
+    }
+ }
