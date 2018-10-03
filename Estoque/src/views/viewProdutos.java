@@ -11,6 +11,7 @@ import estoque.Principal;
 import java.sql.SQLException;
 import models.Produto;
 import tools.Combos;
+import tools.formatacao;
 
 /**
  *
@@ -21,25 +22,29 @@ public class viewProdutos extends javax.swing.JFrame {
  Combos objComboGrupos;
  int id;
  Produto objProduto;
+ int type;
     /**
      * Creates new form viewProdutos
      */
     public viewProdutos() {
         initComponents();
         produtoController produtoCon = new produtoController(null, jtbProdutos);
-        produtoCon.preencherTabela();
+        produtoCon.preencherTabela(2,0,null);
         btnAlterar.setEnabled(false);
         btnInativar.setEnabled(false);
-        
+        btnExcluir.setEnabled(false);
+        formatacao.colocaMascara(txtDataAdd, "##/##/####");
         try 
         {
          objComboStatus = new Combos(jcbStatus);
          objComboStatus.PreencheCombo("SELECT id, nome FROM status ORDER BY nome",false);
+        
         }    
         catch (SQLException e) 
         {
             System.out.println("Erro ao preencher combobox");
         }
+        jcbStatus.setEnabled(false);
         try 
         {
          objComboGrupos = new Combos(jcbGrupos);
@@ -85,6 +90,8 @@ public class viewProdutos extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         txtBusca = new javax.swing.JTextField();
         btnBusca = new javax.swing.JButton();
+        lblDataAdd = new javax.swing.JLabel();
+        txtDataAdd = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -226,6 +233,12 @@ public class viewProdutos extends javax.swing.JFrame {
             }
         });
 
+        lblDataAdd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblDataAdd.setForeground(new java.awt.Color(204, 0, 0));
+        lblDataAdd.setText("Data Adicionado:");
+
+        txtDataAdd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -258,31 +271,37 @@ public class viewProdutos extends javax.swing.JFrame {
                                     .addComponent(btnVoltar))
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnInserir)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnAlterar)
-                                        .addGap(14, 14, 14)
-                                        .addComponent(btnInativar))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblStatus)
-                                        .addGap(253, 253, 253)))
+                                .addComponent(btnInserir)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnAlterar)
+                                .addGap(14, 14, 14)
+                                .addComponent(btnInativar)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnExcluir)
                                 .addGap(59, 59, 59)
                                 .addComponent(btnLimpar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblGrupo)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblGrupo)
+                                        .addGap(71, 71, 71)
+                                        .addComponent(lblQntdMin))
                                     .addComponent(jcbGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblQntdMin)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGap(260, 260, 260)
                                         .addComponent(txtQntdMin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(253, 253, 253)))
+                                .addGap(253, 253, 253))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblStatus)
+                                        .addGap(72, 72, 72)
+                                        .addComponent(lblDataAdd))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtDataAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 14, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -311,15 +330,20 @@ public class viewProdutos extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(lblStatus)
-                                .addGap(11, 11, 11)
+                                .addGap(4, 4, 4)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblStatus)
+                                    .addComponent(lblDataAdd))
+                                .addGap(8, 8, 8)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblQntdMin)
-                                    .addComponent(txtQntdMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblGrupo)
+                                    .addComponent(txtDataAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblGrupo)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblQntdMin)
+                                        .addComponent(txtQntdMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jcbGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(28, 28, 28)
@@ -332,7 +356,7 @@ public class viewProdutos extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnBusca))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,7 +370,25 @@ public class viewProdutos extends javax.swing.JFrame {
 
     private void jtbProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbProdutosMouseClicked
         // TODO add your handling code here:
-
+        int linha = jtbProdutos.getSelectedRow();
+        id = (int) jtbProdutos.getModel().getValueAt(linha, 0);
+        
+        produtoController produtoCon = new produtoController();
+        objProduto = produtoCon.buscar(id);
+        preencherCampos(objProduto);
+        
+        int s=objProduto.getStatus();
+        if (s==1)
+        {
+          jcbStatus.setEnabled(false);
+        }
+        else
+        {
+           jcbStatus.setEnabled(true);  
+        }
+        btnAlterar.setEnabled(true);
+        btnInativar.setEnabled(true);
+        btnExcluir.setEnabled(true);
     }//GEN-LAST:event_jtbProdutosMouseClicked
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
@@ -374,9 +416,7 @@ public class viewProdutos extends javax.swing.JFrame {
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // TODO add your handling code here:
         limparCampos();
-        jcbStatus.setEnabled(true);
-        btnAlterar.setEnabled(false);
-        btnInativar.setEnabled(false);
+
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -400,16 +440,24 @@ public class viewProdutos extends javax.swing.JFrame {
         objComboStatus.SetaComboBox("");
         jtaInfo.setText("");
         txtQntdMin.setText("");
+        txtDataAdd.setText("");
         objComboGrupos.SetaComboBox("");
-        
-        atualizarTabela();
+
+        jcbStatus.setSelectedIndex(0);
+        jcbStatus.setEnabled(false);
+        btnAlterar.setEnabled(false);
+        btnInativar.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        jcbInativos.setSelected(false);
+        type=checkboxInativar();
+        atualizarTabela(type);
     }
-    private void atualizarTabela() 
+    private void atualizarTabela(int type) 
     {
         try 
         {
             produtoController produtoCon = new produtoController(null, jtbProdutos);
-            produtoCon.preencherTabela();
+            produtoCon.preencherTabela(type,0,null);
 
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
@@ -424,6 +472,49 @@ public class viewProdutos extends javax.swing.JFrame {
         objComboStatus.SetaComboBox(String.valueOf(objProduto.getStatus()));
         objComboGrupos.SetaComboBox(String.valueOf(objProduto.getGrupo()));
         txtQntdMin.setText(String.valueOf(objProduto.getQntd_min()));
+        txtDataAdd.setText(String.valueOf(objProduto.getData_add()));
+    }
+    
+    private boolean validarDados() 
+    {
+        try {
+            produtoController produtoCon = new produtoController();
+           if ((jtaInfo.getText().trim().length()>0) && (txtNome.getText().trim().length()>5) && 
+                   (txtQntdMin.getText().trim().length()!=0))
+            {
+            return true;
+            } else
+               return false;
+        } 
+        catch (Exception ex) 
+        {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+            return false;
+        }
+    }
+    
+    private void guardarInclusao() 
+    {
+        try 
+        {
+            objProduto = new Produto();
+            objProduto.setNome(txtNome.getText());
+            objProduto.setInfo(jtaInfo.getText());
+            objProduto.setQntd_min(Integer.parseInt(txtQntdMin.getText()));
+            objProduto.setData_add(txtDataAdd.getText());
+
+            Combos c = (Combos) jcbStatus.getSelectedItem();
+            String status = c.getCodigo();
+            objProduto.setStatus(Integer.parseInt(status));
+            
+            Combos co = (Combos) jcbGrupos.getSelectedItem();
+            String grupo = co.getCodigo();
+            objProduto.setGrupo(Integer.parseInt(grupo));
+        }
+        catch(Exception ex)
+        {
+        CaixaDeDialogo.obterinstancia().exibirMensagem("Problemas no guardaDados: " + ex.getMessage());
+        }
     }
     
     private void guardarDados() 
@@ -448,6 +539,17 @@ public class viewProdutos extends javax.swing.JFrame {
         CaixaDeDialogo.obterinstancia().exibirMensagem("Problemas no guardaDados: " + ex.getMessage());
         }
     }
+    public int checkboxInativar()
+    {
+        if (jcbInativos.isSelected())
+        {
+           return 1;
+        }
+        else
+        {
+            return 2;
+        }   
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnBusca;
@@ -463,6 +565,7 @@ public class viewProdutos extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcbStatus;
     private javax.swing.JTextArea jtaInfo;
     private javax.swing.JTable jtbProdutos;
+    private javax.swing.JLabel lblDataAdd;
     private javax.swing.JLabel lblGrupo;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblInfo;
@@ -471,6 +574,7 @@ public class viewProdutos extends javax.swing.JFrame {
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtBusca;
+    private javax.swing.JFormattedTextField txtDataAdd;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtQntdMin;

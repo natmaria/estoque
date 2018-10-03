@@ -47,6 +47,8 @@ public class grupoController {
       
       public void preencherTabela(int type,int busca, String nome) 
       {
+          // type para saber se é select com inativos ou não
+          //busca é para saber se é select com busca por nome ou não
         ConnectionFactory.abreConexao();
         Vector<String> cabecalhos = new Vector<String>();
         Vector dadosTabela = new Vector();
@@ -83,7 +85,7 @@ public class grupoController {
                     SQL += " FROM grupos g, status s ";
                     SQL += " WHERE g.status=s.id ";
                     SQL += " AND g.status=1 ";
-                    SQL += " AND g.nome LIKE '%" + nome + "%'";
+                    SQL += " AND LOWER(g.nome) LIKE '%" + nome.toLowerCase() + "%'";
                     SQL += " ORDER BY g.nome ";
                     result = ConnectionFactory.stmt.executeQuery(SQL);
                 } catch (SQLException e) {
