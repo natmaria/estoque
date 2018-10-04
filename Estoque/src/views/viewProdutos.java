@@ -536,7 +536,7 @@ public class viewProdutos extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 
-        private void limparCampos()
+    private void limparCampos()
     {
         txtId.setText("");
         txtNome.setText("");

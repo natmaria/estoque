@@ -5,30 +5,30 @@
  */
 package views;
 
-import controllers.grupoController;
+import controllers.secaoController;
 import estoque.CaixaDeDialogo;
 import estoque.Principal;
 import java.sql.SQLException;
-import models.Grupo;
+import models.Secao;
 import tools.Combos;
 import tools.formatacao;
 
 /**
  *
- * @author nmpetry
+ * @author nmp
  */
-public class viewGrupos extends javax.swing.JFrame {
+public class viewSecoes extends javax.swing.JFrame {
  Combos objComboStatus;
  int id;
- Grupo objGrupo;
+ Secao objSecao;
  int type;
     /**
-     * Creates new form viewGrupos
+     * Creates new form viewSecoes
      */
-    public viewGrupos() {
+    public viewSecoes() {
         initComponents();
-        grupoController grupoCon = new grupoController(null, jtbGrupos);
-        grupoCon.preencherTabela(2,0,null);
+        secaoController secaoCon = new secaoController(null, jtbSecoes);
+        secaoCon.preencherTabela(2,0,null);
         btnAlterar.setEnabled(false);
         btnInativar.setEnabled(false);
         btnExcluir.setEnabled(false);
@@ -54,89 +54,33 @@ public class viewGrupos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitulo = new javax.swing.JLabel();
-        lblId = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
-        lblNome = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
-        lblStatus = new javax.swing.JLabel();
-        jcbStatus = new javax.swing.JComboBox<String>();
-        lblInfo = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtaInfo = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jtbGrupos = new javax.swing.JTable();
-        btnInserir = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
+        lblNome = new javax.swing.JLabel();
         btnInativar = new javax.swing.JButton();
+        txtNome = new javax.swing.JTextField();
         btnVoltar = new javax.swing.JButton();
+        lblStatus = new javax.swing.JLabel();
         btnLimpar = new javax.swing.JButton();
+        jcbStatus = new javax.swing.JComboBox<String>();
         jcbInativos = new javax.swing.JCheckBox();
         btnExcluir = new javax.swing.JButton();
         txtBusca = new javax.swing.JTextField();
         btnBusca = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtbSecoes = new javax.swing.JTable();
+        lblTitulo = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
+        btnInserir = new javax.swing.JButton();
+        lblTamanho = new javax.swing.JLabel();
+        txtTamanho = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(600, 600));
 
-        lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblTitulo.setForeground(new java.awt.Color(204, 0, 0));
-        lblTitulo.setText("Grupos");
-
-        lblId.setBackground(new java.awt.Color(204, 0, 0));
-        lblId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblId.setForeground(new java.awt.Color(204, 0, 0));
-        lblId.setText("ID:");
-
         txtId.setEditable(false);
-
-        lblNome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblNome.setForeground(new java.awt.Color(204, 0, 0));
-        lblNome.setText("Nome:");
-
-        lblStatus.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblStatus.setForeground(new java.awt.Color(204, 0, 0));
-        lblStatus.setText("Status");
-
-        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        lblInfo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblInfo.setForeground(new java.awt.Color(204, 0, 0));
-        lblInfo.setText("Informações:");
-
-        jtaInfo.setColumns(20);
-        jtaInfo.setRows(5);
-        jScrollPane1.setViewportView(jtaInfo);
-
-        jtbGrupos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jtbGrupos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtbGruposMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jtbGrupos);
-
-        btnInserir.setBackground(new java.awt.Color(51, 153, 255));
-        btnInserir.setForeground(new java.awt.Color(255, 255, 255));
-        btnInserir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-check.png"))); // NOI18N
-        btnInserir.setText("Inserir");
-        btnInserir.setBorderPainted(false);
-        btnInserir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInserirActionPerformed(evt);
-            }
-        });
 
         btnAlterar.setBackground(new java.awt.Color(51, 153, 255));
         btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
@@ -148,6 +92,10 @@ public class viewGrupos extends javax.swing.JFrame {
                 btnAlterarActionPerformed(evt);
             }
         });
+
+        lblNome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblNome.setForeground(new java.awt.Color(204, 0, 0));
+        lblNome.setText("Nome:");
 
         btnInativar.setBackground(new java.awt.Color(51, 153, 255));
         btnInativar.setForeground(new java.awt.Color(255, 255, 255));
@@ -171,6 +119,10 @@ public class viewGrupos extends javax.swing.JFrame {
             }
         });
 
+        lblStatus.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblStatus.setForeground(new java.awt.Color(204, 0, 0));
+        lblStatus.setText("Status");
+
         btnLimpar.setBackground(new java.awt.Color(51, 153, 255));
         btnLimpar.setForeground(new java.awt.Color(255, 255, 255));
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-sync.png"))); // NOI18N
@@ -181,6 +133,8 @@ public class viewGrupos extends javax.swing.JFrame {
                 btnLimparActionPerformed(evt);
             }
         });
+
+        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jcbInativos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jcbInativos.setForeground(new java.awt.Color(204, 0, 0));
@@ -213,32 +167,54 @@ public class viewGrupos extends javax.swing.JFrame {
             }
         });
 
+        jtbSecoes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jtbSecoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtbSecoesMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jtbSecoes);
+
+        lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(204, 0, 0));
+        lblTitulo.setText("Seções");
+
+        lblId.setBackground(new java.awt.Color(204, 0, 0));
+        lblId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblId.setForeground(new java.awt.Color(204, 0, 0));
+        lblId.setText("ID:");
+
+        btnInserir.setBackground(new java.awt.Color(51, 153, 255));
+        btnInserir.setForeground(new java.awt.Color(255, 255, 255));
+        btnInserir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-check.png"))); // NOI18N
+        btnInserir.setText("Inserir");
+        btnInserir.setBorderPainted(false);
+        btnInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInserirActionPerformed(evt);
+            }
+        });
+
+        lblTamanho.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTamanho.setForeground(new java.awt.Color(204, 0, 0));
+        lblTamanho.setText("Tamanho");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblStatus)
-                            .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblId)
-                                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtId))
-                                .addGap(41, 41, 41)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNome)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblInfo)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnInserir)
@@ -263,38 +239,62 @@ public class viewGrupos extends javax.swing.JFrame {
                                 .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 8, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblTamanho)
+                                    .addComponent(txtTamanho))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblId)
+                                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtId))
+                                .addGap(41, 41, 41)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNome)
+                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblStatus)
+                                    .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(94, 94, 94)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitulo)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblId)
-                    .addComponent(lblNome)
-                    .addComponent(lblInfo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTitulo)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblId)
+                            .addComponent(lblNome))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblStatus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(lblTamanho)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInserir)
                     .addComponent(btnAlterar)
                     .addComponent(btnInativar)
                     .addComponent(btnLimpar)
                     .addComponent(btnExcluir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnBusca)
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -310,89 +310,59 @@ public class viewGrupos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
-        // TODO add your handling code here:
-        if (validarDados()==true)
-        {
-            guardarInclusao();
-            grupoController grupoCon = new grupoController(objGrupo); 
-            try
-            {
-            boolean inclusao = grupoCon.incluir();
-                if (inclusao ==true)
-                {
-                    type=checkboxInativar();
-                    atualizarTabela(type);
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo inserido com sucesso!", "Inserido", 'i');
-                }
-                else
-                {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir grupo.", "ERRO", 'e');
-                }
-            }
-            catch (Exception e)
-            {
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
-            }    
-        } else
-        {
-            CaixaDeDialogo.obterinstancia().exibirMensagem("É necessário preencher todos os campos!", "Preencher campos!", 'e');
-        }
-    }//GEN-LAST:event_btnInserirActionPerformed
-
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
         if (validarDados()==true)
         {
             guardarDados();
-            grupoController grupoCon = new grupoController(objGrupo); 
+            secaoController secaoCon = new secaoController(objSecao);
             try
             {
-            boolean alteracao = grupoCon.alterar();
+                boolean alteracao = secaoCon.alterar();
                 if (alteracao ==true)
                 {
                     type=checkboxInativar();
                     atualizarTabela(type);
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo alterado com sucesso!", "Alterado", 'i');
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Seção alterada com sucesso!", "Alterado", 'i');
                 }
                 else
                 {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar grupo.", "ERRO", 'e');
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar seção.", "ERRO", 'e');
                 }
             }
             catch (Exception e)
             {
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
-            }    
+            }
         } else
         {
             CaixaDeDialogo.obterinstancia().exibirMensagem("É necessário preencher todos os campos!", "Preencher campos!", 'e');
-        }        
+        }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnInativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInativarActionPerformed
         // TODO add your handling code here:
-            guardarDados();
-            objGrupo.setDt_inativado(formatacao.retornaDataAtual("yyyy-MM-dd"));
-            grupoController grupoCon = new grupoController(objGrupo); 
-            try
+        guardarDados();
+        objSecao.setDt_inativado(formatacao.retornaDataAtual("yyyy-MM-dd"));
+        secaoController secaoCon = new secaoController(objSecao);
+        try
+        {
+            boolean inativacao = secaoCon.inativar();
+            if (inativacao ==true)
             {
-            boolean inativacao = grupoCon.inativar();
-                if (inativacao ==true)
-                {
-                    type=checkboxInativar();
-                    atualizarTabela(type);
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo inativado com sucesso!", "Inativado", 'i');
-                }
-                else
-                {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao inativar grupo.", "ERRO", 'e');
-                }
+                type=checkboxInativar();
+                atualizarTabela(type);
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Seção inativada com sucesso!", "Inativada", 'i');
             }
-            catch (Exception e)
+            else
             {
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
-            }    
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao inativar seção.", "ERRO", 'e');
+            }
+        }
+        catch (Exception e)
+        {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnInativarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -402,30 +372,6 @@ public class viewGrupos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void jtbGruposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbGruposMouseClicked
-        // TODO add your handling code here:
-        int linha = jtbGrupos.getSelectedRow();
-        id = (int) jtbGrupos.getModel().getValueAt(linha, 0);
-        //        System.out.println(id);
-
-        grupoController grupoCon = new grupoController();
-        objGrupo = grupoCon.buscar(id);
-        preencherCampos(objGrupo);
-        
-        int s=objGrupo.getStatus();
-        if (s==1)
-        {
-        jcbStatus.setEnabled(false);
-        }
-        else
-        {
-        jcbStatus.setEnabled(true);  
-        }
-        btnAlterar.setEnabled(true);
-        btnInativar.setEnabled(true);
-        btnExcluir.setEnabled(true);
-    }//GEN-LAST:event_jtbGruposMouseClicked
-
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // TODO add your handling code here:
         limparCampos();
@@ -433,49 +379,103 @@ public class viewGrupos extends javax.swing.JFrame {
 
     private void jcbInativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbInativosActionPerformed
         // TODO add your handling code here:
-       type =checkboxInativar();
+        type =checkboxInativar();
         atualizarTabela(type);
     }//GEN-LAST:event_jcbInativosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-            guardarDados();
-            grupoController grupoCon = new grupoController(objGrupo); 
-            boolean escolha= CaixaDeDialogo.obterinstancia().pedirConfirmacao("Tem certeza que deseja excluir o grupo?", 
-                            "Excluir?", 'p');
-            if (escolha==true)
-            {
-                try {
-                    boolean exclusao = grupoCon.excluir();
-                    if (exclusao == true) {
-                        type = checkboxInativar();
-                        atualizarTabela(type);
-                        limparCampos();
-                        CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo excluído com sucesso!", "Excluído", 'i');
+        guardarDados();
+        secaoController secaoCon = new secaoController(objSecao);
+        boolean escolha= CaixaDeDialogo.obterinstancia().pedirConfirmacao("Tem certeza que deseja excluir a seção?",
+            "Excluir?", 'p');
+        if (escolha==true)
+        {
+            try {
+                boolean exclusao = secaoCon.excluir();
+                if (exclusao == true) {
+                    type = checkboxInativar();
+                    atualizarTabela(type);
+                    limparCampos();
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Seção excluída com sucesso!", "Excluída", 'i');
 
-                    } else {
-                        CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao excluir grupo.", "ERRO", 'e');
-                    }
-                } catch (Exception e) {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
+                } else {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao excluir seção.", "ERRO", 'e');
                 }
+            } catch (Exception e) {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
             }
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
         // TODO add your handling code here:
-        grupoController grupoCon = new grupoController(null, jtbGrupos);
+        secaoController secaoCon = new secaoController(null, jtbSecoes);
         type=checkboxInativar();
-        grupoCon.preencherTabela(type,1,txtBusca.getText());
+        secaoCon.preencherTabela(type,1,txtBusca.getText());
     }//GEN-LAST:event_btnBuscaActionPerformed
 
-    
-    private void preencherCampos(Grupo objGrupo)
+    private void jtbSecoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbSecoesMouseClicked
+        // TODO add your handling code here:
+        int linha = jtbSecoes.getSelectedRow();
+        id = (int) jtbSecoes.getModel().getValueAt(linha, 0);
+        //        System.out.println(id);
+
+        secaoController secaoCon = new secaoController();
+        objSecao = secaoCon.buscar(id);
+        preencherCampos(objSecao);
+
+        int s=objSecao.getStatus();
+        if (s==1)
+        {
+            jcbStatus.setEnabled(false);
+        }
+        else
+        {
+            jcbStatus.setEnabled(true);
+        }
+        btnAlterar.setEnabled(true);
+        btnInativar.setEnabled(true);
+        btnExcluir.setEnabled(true);
+    }//GEN-LAST:event_jtbSecoesMouseClicked
+
+    private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
+        // TODO add your handling code here:
+        if (validarDados()==true)
+        {
+            guardarInclusao();
+            secaoController secaoCon = new secaoController(objSecao);
+            try
+            {
+                boolean inclusao = secaoCon.incluir();
+                if (inclusao ==true)
+                {
+                    type=checkboxInativar();
+                    atualizarTabela(type);
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Seção inserida com sucesso!", "Inserida", 'i');
+                }
+                else
+                {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir seção.", "ERRO", 'e');
+                }
+            }
+            catch (Exception e)
+            {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
+            }
+        } else
+        {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("É necessário preencher todos os campos!", "Preencher campos!", 'e');
+        }
+    }//GEN-LAST:event_btnInserirActionPerformed
+
+    private void preencherCampos(Secao objSecao)
     {
-        txtId.setText(String.valueOf(objGrupo.getId()));
-        txtNome.setText(objGrupo.getNome());
-        objComboStatus.SetaComboBox(String.valueOf(objGrupo.getStatus()));
-        jtaInfo.setText(objGrupo.getInfo());
+        txtId.setText(String.valueOf(objSecao.getId()));
+        txtNome.setText(objSecao.getNome());
+        objComboStatus.SetaComboBox(String.valueOf(objSecao.getStatus()));
+        String tam=String.valueOf(objSecao.getTamanho());
+        txtTamanho.setText(tam);
     }
     
     private void limparCampos()
@@ -483,7 +483,7 @@ public class viewGrupos extends javax.swing.JFrame {
         txtId.setText("");
         txtNome.setText("");
         objComboStatus.SetaComboBox("");
-        jtaInfo.setText("");
+        txtTamanho.setText("");
         
         jcbStatus.setSelectedIndex(0);
         jcbStatus.setEnabled(false);
@@ -499,23 +499,28 @@ public class viewGrupos extends javax.swing.JFrame {
     {
         try 
         {
-            grupoController grupoCon = new grupoController(null, jtbGrupos);
-            grupoCon.preencherTabela(type,0,null);
+            secaoController secaoCon = new secaoController(null, jtbSecoes);
+            secaoCon.preencherTabela(type,0,null);
 
-        } catch (Exception ex) {
+        } 
+        catch (Exception ex) 
+        {
             CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
         }
     }
-     
+
     private boolean validarDados() 
     {
-        try {
-            grupoController grupoCon = new grupoController();
-           if ((jtaInfo.getText().trim().length()>0) && (txtNome.getText().trim().length()>5))
+        try 
+        {
+            secaoController secaoCon = new secaoController();
+           if ((txtTamanho.getText().trim().length()>0) && (txtNome.getText().trim().length()>5))
             {
             return true;
             } else
+           {
                return false;
+           }
         } 
         catch (Exception ex) 
         {
@@ -524,29 +529,18 @@ public class viewGrupos extends javax.swing.JFrame {
         }
     }
     
-//    private boolean validarAlteracao()
-//    {
-//        if ((jtaInfo.getText().trim().length()>0) && (txtNome.getText().trim().length()>5))
-//        {
-//            return true;
-//        } else 
-//        {
-//            return false;
-//        }
-//    }
-    
     private void guardarDados() 
     {
         try 
         {
-            objGrupo = new Grupo();
-            objGrupo.setId(Integer.parseInt(txtId.getText()));
-            objGrupo.setNome(txtNome.getText());
-            objGrupo.setInfo(jtaInfo.getText());
+            objSecao = new Secao();
+            objSecao.setId(Integer.parseInt(txtId.getText()));
+            objSecao.setNome(txtNome.getText());
+            objSecao.setTamanho(Double.parseDouble(txtTamanho.getText()));
 
             Combos c = (Combos) jcbStatus.getSelectedItem();
             String status = c.getCodigo();
-            objGrupo.setStatus(Integer.parseInt(status));
+            objSecao.setStatus(Integer.parseInt(status));
         }
         catch(Exception ex)
         {
@@ -558,20 +552,20 @@ public class viewGrupos extends javax.swing.JFrame {
     {
         try 
         {
-            objGrupo = new Grupo();
-            objGrupo.setNome(txtNome.getText());
-            objGrupo.setInfo(jtaInfo.getText());
+            objSecao = new Secao();
+            objSecao.setNome(txtNome.getText());
+            objSecao.setTamanho(Double.parseDouble(txtTamanho.getText()));
 
             Combos c = (Combos) jcbStatus.getSelectedItem();
             String status = c.getCodigo();
-            objGrupo.setStatus(Integer.parseInt(status));
+            objSecao.setStatus(Integer.parseInt(status));
         }
         catch(Exception ex)
         {
         CaixaDeDialogo.obterinstancia().exibirMensagem("Problemas no guardaDados: " + ex.getMessage());
         }
     }
-       
+    
     public int checkboxInativar()
     {
         if (jcbInativos.isSelected())
@@ -591,19 +585,18 @@ public class viewGrupos extends javax.swing.JFrame {
     private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JCheckBox jcbInativos;
     private javax.swing.JComboBox<String> jcbStatus;
-    private javax.swing.JTextArea jtaInfo;
-    private javax.swing.JTable jtbGrupos;
+    private javax.swing.JTable jtbSecoes;
     private javax.swing.JLabel lblId;
-    private javax.swing.JLabel lblInfo;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblStatus;
+    private javax.swing.JLabel lblTamanho;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtBusca;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtTamanho;
     // End of variables declaration//GEN-END:variables
 }

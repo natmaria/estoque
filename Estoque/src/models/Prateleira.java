@@ -12,12 +12,12 @@ package models;
 public class Prateleira {
     private int id;
     private String nome;
-    private String info;
     private double altura;
     private double largura;
-    private String secao;
-    private String produto;
-    private String status;
+    private int secao;
+    private int produto;
+    private int status;
+    private String dt_inativado;
 
     public int getId() {
         return id;
@@ -33,14 +33,6 @@ public class Prateleira {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
     }
 
     public double getAltura() {
@@ -59,28 +51,36 @@ public class Prateleira {
         this.largura = largura;
     }
 
-    public String getSecao() {
+    public int getSecao() {
         return secao;
     }
 
-    public void setSecao(String secao) {
+    public void setSecao(int secao) {
         this.secao = secao;
     }
 
-    public String getProduto() {
+    public int getProduto() {
         return produto;
     }
 
-    public void setProduto(String produto) {
+    public void setProduto(int produto) {
         this.produto = produto;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getDt_inativado() {
+        return dt_inativado;
+    }
+
+    public void setDt_inativado(String dt_inativado) {
+        this.dt_inativado = dt_inativado;
     }
     
 }
