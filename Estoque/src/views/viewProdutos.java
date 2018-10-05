@@ -407,8 +407,9 @@ public class viewProdutos extends javax.swing.JFrame {
             boolean inclusao = produtoCon.incluir();
                 if (inclusao ==true)
                 {
-                    type=checkboxInativar();
+                    type = checkboxInativar();
                     atualizarTabela(type);
+                    limparCampos();
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Produto inserido com sucesso!", "Inserido", 'i');
                 }
                 else
@@ -424,6 +425,7 @@ public class viewProdutos extends javax.swing.JFrame {
         {
             CaixaDeDialogo.obterinstancia().exibirMensagem("É necessário preencher todos os campos!", "Preencher campos!", 'e');
         }
+        
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -437,8 +439,9 @@ public class viewProdutos extends javax.swing.JFrame {
             boolean alteracao = produtoCon.alterar();
                 if (alteracao ==true)
                 {
-                    type=checkboxInativar();
+                    type = checkboxInativar();
                     atualizarTabela(type);
+                    limparCampos();
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Produto alterado com sucesso!", "Alterado", 'i');
                 }
                 else
@@ -453,7 +456,8 @@ public class viewProdutos extends javax.swing.JFrame {
         } else
         {
             CaixaDeDialogo.obterinstancia().exibirMensagem("É necessário preencher todos os campos!", "Preencher campos!", 'e');
-        }        
+        }   
+       
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnInativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInativarActionPerformed
@@ -478,7 +482,8 @@ public class viewProdutos extends javax.swing.JFrame {
             catch (Exception e)
             {
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
-            }                           
+            }    
+            limparCampos();
     }//GEN-LAST:event_btnInativarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -505,9 +510,6 @@ public class viewProdutos extends javax.swing.JFrame {
                 try {
                     boolean exclusao = produtoCon.excluir();
                     if (exclusao == true) {
-                        type = checkboxInativar();
-                        atualizarTabela(type);
-                        limparCampos();
                         CaixaDeDialogo.obterinstancia().exibirMensagem("Produto excluído com sucesso!", "Excluído", 'i');
 
                     } else {
@@ -517,6 +519,9 @@ public class viewProdutos extends javax.swing.JFrame {
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
                 }
             }
+        type = checkboxInativar();
+        atualizarTabela(type);
+        limparCampos();
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
@@ -543,10 +548,11 @@ public class viewProdutos extends javax.swing.JFrame {
         objComboStatus.SetaComboBox("");
         jtaInfo.setText("");
         txtQntdMin.setText("");
-        txtDataAdd.setText("");
+        formatacao.colocaMascara(txtDataAdd, "##/##/####");
         objComboGrupos.SetaComboBox("");
 
         jcbStatus.setSelectedIndex(0);
+        jcbGrupos.setSelectedIndex(0);
         jcbStatus.setEnabled(false);
         btnAlterar.setEnabled(false);
         btnInativar.setEnabled(false);
@@ -575,15 +581,15 @@ public class viewProdutos extends javax.swing.JFrame {
         objComboStatus.SetaComboBox(String.valueOf(objProduto.getStatus()));
         objComboGrupos.SetaComboBox(String.valueOf(objProduto.getGrupo()));
         txtQntdMin.setText(String.valueOf(objProduto.getQntd_min()));
-        txtDataAdd.setText(String.valueOf(objProduto.getData_add()));
+        txtDataAdd.setText(String.valueOf(formatacao.ajustaDataDMA(objProduto.getData_add())));
     }
     
     private boolean validarDados() 
     {
         try {
             produtoController produtoCon = new produtoController();
-           if ((jtaInfo.getText().trim().length()>0) && (txtNome.getText().trim().length()>5) && 
-                   (txtQntdMin.getText().trim().length()!=0) && (txtDataAdd.getText().trim().length()==8))
+           if ((jtaInfo.getText().trim().length()>0) && (txtNome.getText().trim().length()>1) && 
+                   (txtQntdMin.getText().trim().length()!=0) && (txtDataAdd.getText().trim().length()==10))
             {
             return true;
             } else
@@ -628,7 +634,8 @@ public class viewProdutos extends javax.swing.JFrame {
             objProduto.setId(Integer.parseInt(txtId.getText()));
             objProduto.setNome(txtNome.getText());
             objProduto.setInfo(jtaInfo.getText());
-
+            objProduto.setData_add(txtDataAdd.getText());
+            
             Combos c = (Combos) jcbStatus.getSelectedItem();
             String status = c.getCodigo();
             objProduto.setStatus(Integer.parseInt(status));

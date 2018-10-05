@@ -1,0 +1,73 @@
+create table usuarios
+(
+id serial not null,
+login varchar(10) not null,
+nome varchar(100) not null,
+senha varchar(100) not null,
+CONSTRAINT PK_usuarios PRIMARY KEY(id),
+CONTRAINT UN_loginusuarios UNIQUE(login)
+);
+insert into usuarios VALUES ("admin", "Administrador", "admin123");
+
+create table status
+(
+id int not null,
+nome varchar(50) not null,
+CONSTRAINT PK_status PRIMARY KEY(id)
+);
+insert into status VALUES (1, 'Ativado');
+insert into status VALUES (2, 'Inativado');
+
+create table grupos
+(
+id serial not null,
+nome varchar(100) not null,
+info varchar(300) not null,
+status int not null,
+dt_inativado date,
+CONSTRAINT PK_grupos PRIMARY KEY(id),
+CONSTRAINT FK_statusgrupo FOREIGN KEY(status) REFERENCES status
+);
+
+create table produtos
+(
+int serial not null,
+nome varchar(100) not null,
+info varchar(300) not null,
+qntd_min int not null,
+id_grupo int not null,
+data_add date not null,
+status int not null,
+dt_inativado date,
+CONSTRAINT PK_produtos PRIMARY KEY(id),
+CONSTRAINT FK_statusprodutos FOREIGN KEY(status) REFERENCES status,
+CONSTRAINT FK_idgrupoprodutos FOREIGN KEY(id_grupo) REFERENCES grupos
+);
+
+create table secoes
+(
+id serial not null,
+nome varchar(50) not null,
+tamanho decimal(5,2) not null,
+status int not null,
+dt_inativado date,
+CONSTRAINT PK_secoes PRIMARY KEY(id),
+CONSTRAINT FK_statussecoes FOREIGN KEY(status) REFERENCES status,
+CONTRAINT UN_nomesecao UNIQUE(nome)
+);
+
+create table prateleiras
+(
+id serial not null,
+nome varchar(50) not null,
+altura decimal(5,2) not null,
+largura decimal(5,2) not null,
+id_secao int not null,
+id_produto int not null,
+status int not null,
+dt_inativado date,
+CONSTRAINT PK_prateleiras PRIMARY KEY(id),
+CONSTRAINT FK_statusprateleiras FOREIGN KEY(status) REFERENCES status,
+CONSTRAINT FK_secaoprateleiras FOREIGN KEY(id_secao) REFERENCES secoes,
+CONSTRAINT FK_produtoprateleiras FOREIGN KEY(id_produto) REFERENCES produtos
+);

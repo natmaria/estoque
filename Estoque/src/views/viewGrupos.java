@@ -5,9 +5,13 @@
  */
 package views;
 
+import com.placeholder.PlaceHolder;
 import controllers.grupoController;
 import estoque.CaixaDeDialogo;
 import estoque.Principal;
+import java.awt.Color;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.sql.SQLException;
 import models.Grupo;
 import tools.Combos;
@@ -32,7 +36,7 @@ public class viewGrupos extends javax.swing.JFrame {
         btnAlterar.setEnabled(false);
         btnInativar.setEnabled(false);
         btnExcluir.setEnabled(false);
-        
+//        PlaceHolder holder = new PlaceHolder(txtBusca, "Nome");        
         try 
         {
          objComboStatus = new Combos(jcbStatus);
@@ -467,6 +471,7 @@ public class viewGrupos extends javax.swing.JFrame {
         grupoController grupoCon = new grupoController(null, jtbGrupos);
         type=checkboxInativar();
         grupoCon.preencherTabela(type,1,txtBusca.getText());
+        
     }//GEN-LAST:event_btnBuscaActionPerformed
 
     

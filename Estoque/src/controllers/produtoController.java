@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import models.Produto;
+import tools.formatacao;
 
 /**
  *
@@ -63,7 +64,7 @@ public class produtoController
                 try 
                 {
                     String SQL = "";
-                    SQL = " SELECT p.id,p.nome,p.info,p.qntd_min,s.nome  ";
+                    SQL = " SELECT p.id,p.nome,p.info,p.qntd_min,s.nome ";
                     SQL += " FROM produtos p,status s ";
                     SQL += " WHERE p.status=s.id ";
                     SQL += " AND p.status=1 ";
@@ -142,8 +143,8 @@ public class produtoController
                 linha.add(result.getInt(1));
                 linha.add(result.getString(2));
                 linha.add(result.getString(3));
-                linha.add(result.getString(4));
-                linha.add(result.getInt(5));
+                linha.add(result.getInt(4));
+                linha.add(result.getString(5));
                 dadosTabela.add(linha);
             }
         }
@@ -211,7 +212,7 @@ public class produtoController
             ResultSet rs = null;
 
             String SQL = "";
-            SQL = " SELECT id,nome,info,id_grupo,qntd_min,status,dt_add  ";
+            SQL = " SELECT id,nome,info,id_grupo,qntd_min,status,data_add  ";
             SQL += " FROM produtos ";
             SQL += " WHERE id = '" + id + "'";
             //stm.executeQuery(SQL);  
@@ -258,14 +259,14 @@ public class produtoController
         
         try 
         {
-            stmt = con.prepareStatement("INSERT INTO produtos (nome, info, id_grupo, qntd_min, status, dt_add)VALUES(?,?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO produtos (nome, info, id_grupo, qntd_min, status, data_add)VALUES(?,?,?,?,?,?)");
 //            stmt.setInt(1,objGrupo.getId());
             stmt.setString(1, objProduto.getNome());
             stmt.setString(2, objProduto.getInfo());
             stmt.setInt(3, objProduto.getGrupo());
             stmt.setInt(4, objProduto.getQntd_min());
             stmt.setInt(5, objProduto.getStatus());
-            stmt.setDate(6, Date.valueOf(objProduto.getData_add()));
+            stmt.setDate(6, Date.valueOf(formatacao.ajustaDataAMD(objProduto.getData_add())));
             
             stmt.executeUpdate();
             
@@ -293,13 +294,14 @@ public class produtoController
  
         try 
         {
-            stmt = con.prepareStatement("UPDATE produtos SET nome=?, info=?, id_grupo=?, qntd_min=?, status=?, dt_add=? WHERE id=?");
+            stmt = con.prepareStatement("UPDATE produtos SET nome=?, info=?, id_grupo=?, qntd_min=?, status=?, data_add=? WHERE id=?");
             stmt.setString(1, objProduto.getNome());
             stmt.setString(2, objProduto.getInfo());
             stmt.setInt(3, objProduto.getGrupo());
             stmt.setInt(4, objProduto.getQntd_min());
             stmt.setInt(5, objProduto.getStatus());
-            stmt.setDate(4, Date.valueOf(objProduto.getData_add()));
+            stmt.setDate(6, Date.valueOf(formatacao.ajustaDataAMD(objProduto.getData_add())));
+            stmt.setInt(7, objProduto.getId());
 
             stmt.executeUpdate();
 
