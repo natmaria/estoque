@@ -59,12 +59,10 @@ public class viewGrupos extends javax.swing.JFrame {
     private void initComponents() {
 
         lblTitulo = new javax.swing.JLabel();
-        lblId = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lblStatus = new javax.swing.JLabel();
-        jcbStatus = new javax.swing.JComboBox<String>();
+        jcbStatus = new javax.swing.JComboBox<>();
         lblInfo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaInfo = new javax.swing.JTextArea();
@@ -88,22 +86,21 @@ public class viewGrupos extends javax.swing.JFrame {
         lblTitulo.setForeground(new java.awt.Color(204, 0, 0));
         lblTitulo.setText("Grupos");
 
-        lblId.setBackground(new java.awt.Color(204, 0, 0));
-        lblId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblId.setForeground(new java.awt.Color(204, 0, 0));
-        lblId.setText("ID:");
-
-        txtId.setEditable(false);
-
         lblNome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblNome.setForeground(new java.awt.Color(204, 0, 0));
         lblNome.setText("Nome:");
+
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomeKeyTyped(evt);
+            }
+        });
 
         lblStatus.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblStatus.setForeground(new java.awt.Color(204, 0, 0));
         lblStatus.setText("Status");
 
-        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lblInfo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblInfo.setForeground(new java.awt.Color(204, 0, 0));
@@ -111,6 +108,11 @@ public class viewGrupos extends javax.swing.JFrame {
 
         jtaInfo.setColumns(20);
         jtaInfo.setRows(5);
+        jtaInfo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtaInfoKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtaInfo);
 
         jtbGrupos.setModel(new javax.swing.table.DefaultTableModel(
@@ -228,16 +230,10 @@ public class viewGrupos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblStatus)
                             .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblId)
-                                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtId))
-                                .addGap(41, 41, 41)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNome)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(15, 15, 15)
+                            .addComponent(lblTitulo)
+                            .addComponent(lblNome)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(106, 106, 106)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblInfo)
@@ -276,21 +272,19 @@ public class viewGrupos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblTitulo)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblId)
-                    .addComponent(lblNome)
-                    .addComponent(lblInfo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblInfo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblNome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
                         .addComponent(lblStatus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInserir)
@@ -327,6 +321,7 @@ public class viewGrupos extends javax.swing.JFrame {
                 {
                     type=checkboxInativar();
                     atualizarTabela(type);
+                    limparCampos();
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo inserido com sucesso!", "Inserido", 'i');
                 }
                 else
@@ -386,6 +381,7 @@ public class viewGrupos extends javax.swing.JFrame {
                 {
                     type=checkboxInativar();
                     atualizarTabela(type);
+                    limparCampos();
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo inativado com sucesso!", "Inativado", 'i');
                 }
                 else
@@ -474,10 +470,30 @@ public class viewGrupos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnBuscaActionPerformed
 
+    private void txtNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyTyped
+        // TODO add your handling code here:
+        int maximo = 100;
+        if((txtNome.getText().length()>=maximo))
+        {
+            evt.consume();
+            txtNome.setText(txtNome.getText().substring(0,maximo));
+        }
+    }//GEN-LAST:event_txtNomeKeyTyped
+
+    private void jtaInfoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtaInfoKeyTyped
+        // TODO add your handling code here:
+        int maximo = 300;
+        if((jtaInfo.getText().length()>=maximo))
+        {
+            evt.consume();
+            jtaInfo.setText(jtaInfo.getText().substring(0,maximo));
+        }
+    }//GEN-LAST:event_jtaInfoKeyTyped
+
     
     private void preencherCampos(Grupo objGrupo)
     {
-        txtId.setText(String.valueOf(objGrupo.getId()));
+        
         txtNome.setText(objGrupo.getNome());
         objComboStatus.SetaComboBox(String.valueOf(objGrupo.getStatus()));
         jtaInfo.setText(objGrupo.getInfo());
@@ -485,7 +501,7 @@ public class viewGrupos extends javax.swing.JFrame {
     
     private void limparCampos()
     {
-        txtId.setText("");
+       
         txtNome.setText("");
         objComboStatus.SetaComboBox("");
         jtaInfo.setText("");
@@ -545,7 +561,7 @@ public class viewGrupos extends javax.swing.JFrame {
         try 
         {
             objGrupo = new Grupo();
-            objGrupo.setId(Integer.parseInt(txtId.getText()));
+            objGrupo.setId(id);
             objGrupo.setNome(txtNome.getText());
             objGrupo.setInfo(jtaInfo.getText());
 
@@ -588,6 +604,9 @@ public class viewGrupos extends javax.swing.JFrame {
             return 2;
         }   
     }
+    
+        
+            
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnBusca;
@@ -602,13 +621,11 @@ public class viewGrupos extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcbStatus;
     private javax.swing.JTextArea jtaInfo;
     private javax.swing.JTable jtbGrupos;
-    private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblInfo;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtBusca;
-    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }

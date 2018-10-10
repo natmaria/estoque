@@ -5,9 +5,9 @@ login varchar(10) not null,
 nome varchar(100) not null,
 senha varchar(100) not null,
 CONSTRAINT PK_usuarios PRIMARY KEY(id),
-CONTRAINT UN_loginusuarios UNIQUE(login)
+CONSTRAINT UN_loginusuarios UNIQUE(login)
 );
-insert into usuarios VALUES ("admin", "Administrador", "admin123");
+insert into usuarios (login, nome, senha) VALUES ('admin', 'Administrador', 'admin123');
 
 create table status
 (
@@ -31,7 +31,7 @@ CONSTRAINT FK_statusgrupo FOREIGN KEY(status) REFERENCES status
 
 create table produtos
 (
-int serial not null,
+id serial not null,
 nome varchar(100) not null,
 info varchar(300) not null,
 qntd_min int not null,
@@ -53,7 +53,7 @@ status int not null,
 dt_inativado date,
 CONSTRAINT PK_secoes PRIMARY KEY(id),
 CONSTRAINT FK_statussecoes FOREIGN KEY(status) REFERENCES status,
-CONTRAINT UN_nomesecao UNIQUE(nome)
+CONSTRAINT UN_nomesecao UNIQUE(nome)
 );
 
 create table prateleiras

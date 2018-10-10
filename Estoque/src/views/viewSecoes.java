@@ -54,7 +54,6 @@ public class viewSecoes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtId = new javax.swing.JTextField();
         btnAlterar = new javax.swing.JButton();
         lblNome = new javax.swing.JLabel();
         btnInativar = new javax.swing.JButton();
@@ -62,7 +61,7 @@ public class viewSecoes extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
         btnLimpar = new javax.swing.JButton();
-        jcbStatus = new javax.swing.JComboBox<String>();
+        jcbStatus = new javax.swing.JComboBox<>();
         jcbInativos = new javax.swing.JCheckBox();
         btnExcluir = new javax.swing.JButton();
         txtBusca = new javax.swing.JTextField();
@@ -70,17 +69,14 @@ public class viewSecoes extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jtbSecoes = new javax.swing.JTable();
         lblTitulo = new javax.swing.JLabel();
-        lblId = new javax.swing.JLabel();
         btnInserir = new javax.swing.JButton();
         lblTamanho = new javax.swing.JLabel();
-        txtTamanho = new javax.swing.JTextField();
+        txtTamanho = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(600, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(600, 600));
-
-        txtId.setEditable(false);
 
         btnAlterar.setBackground(new java.awt.Color(51, 153, 255));
         btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
@@ -105,6 +101,12 @@ public class viewSecoes extends javax.swing.JFrame {
         btnInativar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInativarActionPerformed(evt);
+            }
+        });
+
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomeKeyTyped(evt);
             }
         });
 
@@ -134,7 +136,7 @@ public class viewSecoes extends javax.swing.JFrame {
             }
         });
 
-        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jcbInativos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jcbInativos.setForeground(new java.awt.Color(204, 0, 0));
@@ -189,11 +191,6 @@ public class viewSecoes extends javax.swing.JFrame {
         lblTitulo.setForeground(new java.awt.Color(204, 0, 0));
         lblTitulo.setText("Seções");
 
-        lblId.setBackground(new java.awt.Color(204, 0, 0));
-        lblId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblId.setForeground(new java.awt.Color(204, 0, 0));
-        lblId.setText("ID:");
-
         btnInserir.setBackground(new java.awt.Color(51, 153, 255));
         btnInserir.setForeground(new java.awt.Color(255, 255, 255));
         btnInserir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-check.png"))); // NOI18N
@@ -208,6 +205,17 @@ public class viewSecoes extends javax.swing.JFrame {
         lblTamanho.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTamanho.setForeground(new java.awt.Color(204, 0, 0));
         lblTamanho.setText("Tamanho");
+
+        try {
+            txtTamanho.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtTamanho.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTamanhoKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -227,41 +235,36 @@ public class viewSecoes extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnLimpar))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jcbInativos)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnVoltar))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblTamanho)
-                                    .addComponent(txtTamanho))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jcbInativos)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnVoltar))
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblId)
-                                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtId))
-                                .addGap(41, 41, 41)
+                                .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNome)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblStatus)
-                                    .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(94, 94, 94)))))
+                                    .addComponent(lblTitulo)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lblTamanho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtTamanho))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblNome)
+                                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(26, 26, 26)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblStatus)
+                                            .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -272,13 +275,9 @@ public class viewSecoes extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblTitulo)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblId)
-                            .addComponent(lblNome))
+                        .addComponent(lblNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblStatus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -452,6 +451,7 @@ public class viewSecoes extends javax.swing.JFrame {
                 {
                     type=checkboxInativar();
                     atualizarTabela(type);
+                    limparCampos();
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Seção inserida com sucesso!", "Inserida", 'i');
                 }
                 else
@@ -469,9 +469,28 @@ public class viewSecoes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnInserirActionPerformed
 
+    private void txtTamanhoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTamanhoKeyTyped
+        // TODO add your handling code here:
+         String caracteres="0987654321";
+        if(!caracteres.contains(evt.getKeyChar()+""))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTamanhoKeyTyped
+
+    private void txtNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyTyped
+        // TODO add your handling code here:
+        int maximo = 50;
+        if((txtNome.getText().length()>=maximo))
+        {
+            evt.consume();
+            txtNome.setText(txtNome.getText().substring(0,maximo));
+        }
+    }//GEN-LAST:event_txtNomeKeyTyped
+
     private void preencherCampos(Secao objSecao)
     {
-        txtId.setText(String.valueOf(objSecao.getId()));
+        
         txtNome.setText(objSecao.getNome());
         objComboStatus.SetaComboBox(String.valueOf(objSecao.getStatus()));
         String tam=String.valueOf(objSecao.getTamanho());
@@ -480,10 +499,10 @@ public class viewSecoes extends javax.swing.JFrame {
     
     private void limparCampos()
     {
-        txtId.setText("");
+      
         txtNome.setText("");
         objComboStatus.SetaComboBox("");
-        txtTamanho.setText("");
+        txtTamanho.setValue("");
         
         jcbStatus.setSelectedIndex(0);
         jcbStatus.setEnabled(false);
@@ -514,7 +533,7 @@ public class viewSecoes extends javax.swing.JFrame {
         try 
         {
             secaoController secaoCon = new secaoController();
-           if ((txtTamanho.getText().trim().length()>0) && (txtNome.getText().trim().length()>5))
+           if ((txtTamanho.isEditValid()) && (txtNome.getText().trim().length()>1))
             {
             return true;
             } else
@@ -534,7 +553,7 @@ public class viewSecoes extends javax.swing.JFrame {
         try 
         {
             objSecao = new Secao();
-            objSecao.setId(Integer.parseInt(txtId.getText()));
+            objSecao.setId(id);
             objSecao.setNome(txtNome.getText());
             objSecao.setTamanho(Double.parseDouble(txtTamanho.getText()));
 
@@ -589,14 +608,12 @@ public class viewSecoes extends javax.swing.JFrame {
     private javax.swing.JCheckBox jcbInativos;
     private javax.swing.JComboBox<String> jcbStatus;
     private javax.swing.JTable jtbSecoes;
-    private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblTamanho;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtBusca;
-    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtTamanho;
+    private javax.swing.JFormattedTextField txtTamanho;
     // End of variables declaration//GEN-END:variables
 }

@@ -34,20 +34,11 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblStatus" min="-2" max="-2" attributes="0"/>
                           <Component id="jcbStatus" min="-2" pref="110" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="lblId" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblTitulo" max="32767" attributes="0"/>
-                                  <Component id="txtId" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblNome" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNome" min="-2" pref="220" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="lblTitulo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNome" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNome" min="-2" pref="220" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="lblInfo" min="-2" max="-2" attributes="0"/>
@@ -98,24 +89,21 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblTitulo" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblId" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblInfo" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtId" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="lblInfo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="130" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="lblNome" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtNome" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="lblStatus" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jcbStatus" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="38" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -154,25 +142,6 @@
         <Property name="text" type="java.lang.String" value="Grupos"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblId">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="cc" type="rgb"/>
-        </Property>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="cc" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="ID:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtId">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblNome">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -185,6 +154,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNome">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNomeKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblStatus">
       <Properties>
@@ -235,6 +207,9 @@
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtaInfoKeyTyped"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

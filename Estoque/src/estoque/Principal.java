@@ -6,6 +6,7 @@
 package estoque;
 
 import views.viewGrupos;
+import views.viewPrateleiras;
 import views.viewProdutos;
 import views.viewSecoes;
 
@@ -189,6 +190,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnPrateleirasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrateleirasActionPerformed
         // TODO add your handling code here:
+        viewPrateleiras prateleiras = new viewPrateleiras();
+        prateleiras.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnPrateleirasActionPerformed
 
 

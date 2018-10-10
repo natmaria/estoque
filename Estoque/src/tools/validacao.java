@@ -5,6 +5,8 @@
  */
 package tools;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFormattedTextField;
@@ -98,4 +100,27 @@ public class validacao {
             return true;
         }
     }
+    
+    public static boolean validarData(String data) {
+        try 
+        {
+            //SimpleDateFormat é usada para trabalhar com formatação de datas
+            //neste caso o formatador irá utilizar o formato "dd/MM/yyyy"
+            //dd = dia, MM = mes, yyyy = ano
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            //a mágica desse método acontece aqui, pois o setLenient() é usado para setar
+            //sua escolha sobre datas estranhas, quando eu seto para "false" estou dizendo
+            //que não aceito datas falsas como 31/02/2018
+            sdf.setLenient(false);
+            //aqui eu tento converter a String em um objeto do tipo date, se funcionar
+            //sua data é valida
+            sdf.parse(data);
+            //se nada deu errado retorna true (verdadeiro)
+            return true;
+        } catch (ParseException ex) {
+            //se algum passo dentro do "try" der errado quer dizer que sua data é falsa, então,
+            //retorna falso
+            return false;
+        }
+ }
 }
