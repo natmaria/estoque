@@ -101,7 +101,6 @@ public class viewPrateleiras extends javax.swing.JFrame {
         jcbProduto = new javax.swing.JComboBox<>();
         txtAltura = new javax.swing.JFormattedTextField();
         txtLargura = new javax.swing.JFormattedTextField();
-        txtLargura2 = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -271,17 +270,6 @@ public class viewPrateleiras extends javax.swing.JFrame {
             }
         });
 
-        try {
-            txtLargura2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtLargura2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtLargura2KeyTyped(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -324,9 +312,7 @@ public class viewPrateleiras extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(lblAltura)
                                         .addGap(27, 27, 27)
-                                        .addComponent(lblLargura)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtLargura2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblLargura))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txtAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -368,7 +354,7 @@ public class viewPrateleiras extends javax.swing.JFrame {
                         .addComponent(lblStatus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -379,15 +365,10 @@ public class viewPrateleiras extends javax.swing.JFrame {
                             .addComponent(jcbSecao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jcbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblLargura, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblAltura, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(txtLargura2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblLargura, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblAltura, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -603,10 +584,6 @@ public class viewPrateleiras extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtNomeKeyTyped
 
-    private void txtLargura2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLargura2KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLargura2KeyTyped
-
  private void limparCampos()
     {
         txtNome.setText("");
@@ -646,10 +623,14 @@ public class viewPrateleiras extends javax.swing.JFrame {
         objComboStatus.SetaComboBox(String.valueOf(objPrateleira.getStatus()));
         objComboSecao.SetaComboBox(String.valueOf(objPrateleira.getSecao()));
         objComboProduto.SetaComboBox(String.valueOf(objPrateleira.getProduto()));
-        txtAltura.setText(String.format("%6s", String.valueOf(objPrateleira.getAltura()).replace(' ', '0')));
-        //txtLargura.setText(objPrateleira.getLargura());
-        //txtLargura2.setText(String.valueOf(objPrateleira.getLargura()));
-        System.out.println(objPrateleira.getLargura());
+        String alt;
+        alt = formatacao.formataDecimal(objPrateleira.getAltura());
+        txtAltura.setText(alt);
+        String larg;
+        larg = formatacao.formataDecimal(objPrateleira.getLargura());
+        txtLargura.setText(larg);
+
+       //  System.out.println(objPrateleira.getLargura());
         
       }catch(Exception e){
           System.out.println(e.getMessage());   
@@ -768,7 +749,6 @@ public class viewPrateleiras extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtAltura;
     private javax.swing.JTextField txtBusca;
     private javax.swing.JFormattedTextField txtLargura;
-    private javax.swing.JFormattedTextField txtLargura2;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }

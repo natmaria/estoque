@@ -493,7 +493,8 @@ public class viewSecoes extends javax.swing.JFrame {
         
         txtNome.setText(objSecao.getNome());
         objComboStatus.SetaComboBox(String.valueOf(objSecao.getStatus()));
-        String tam=String.valueOf(objSecao.getTamanho());
+        String tam;
+        tam = formatacao.formataDecimal(objSecao.getTamanho());
         txtTamanho.setText(tam);
     }
     

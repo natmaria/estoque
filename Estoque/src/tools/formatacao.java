@@ -262,4 +262,20 @@ public class formatacao
             return "";
         }
     }
+    
+    public static String formataDecimal(Double value)
+    {
+        String output = "";
+	try
+	{
+		String pattern = "000.00";
+		DecimalFormat myFormatter = new DecimalFormat(pattern);
+		output = myFormatter.format(value);
+	}
+	catch (Exception ex)
+	{
+	System.out.println(ex.getMessage());
+	}
+	return output;
+    }
 }
