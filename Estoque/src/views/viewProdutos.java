@@ -52,7 +52,7 @@ public class viewProdutos extends javax.swing.JFrame {
         try 
         {
          objComboGrupos = new Combos(jcbGrupos);
-         objComboGrupos.PreencheCombo("SELECT id, nome FROM grupos WHERE status=1 ORDER BY nome",false);
+         objComboGrupos.PreencheCombo("SELECT id, nome FROM grupos WHERE status=1 ORDER BY nome",true);
         }    
         catch (SQLException e) 
         {
@@ -650,8 +650,9 @@ public class viewProdutos extends javax.swing.JFrame {
     {
         try {
             boolean dataValida = validacao.validarData(txtDataAdd.getText());
+            int grupos= jcbGrupos.getSelectedIndex();
            if ((jtaInfo.getText().trim().length()>0) && (txtNome.getText().trim().length()>1) && 
-                   (txtQntdMin.getText().trim().length()!=0) && (dataValida==true))
+                   (txtQntdMin.getText().trim().length()!=0) && (dataValida==true) && grupos!=0)
             {
             return true;
             } else
@@ -697,7 +698,7 @@ public class viewProdutos extends javax.swing.JFrame {
             objProduto.setNome(txtNome.getText());
             objProduto.setInfo(jtaInfo.getText());
             objProduto.setData_add(txtDataAdd.getText());
-            
+            objProduto.setQntd_min(Integer.parseInt(txtQntdMin.getText()));
             Combos c = (Combos) jcbStatus.getSelectedItem();
             String status = c.getCodigo();
             objProduto.setStatus(Integer.parseInt(status));

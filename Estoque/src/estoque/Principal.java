@@ -40,6 +40,12 @@ public class Principal extends javax.swing.JFrame {
         lblProdutos = new javax.swing.JLabel();
         lblSecoes = new javax.swing.JLabel();
         lblPrateleiras = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        rltSecoes = new javax.swing.JMenu();
+        rltGrupos = new javax.swing.JMenuItem();
+        rltProdutos = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        rltPrateleiras = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,7 +54,6 @@ public class Principal extends javax.swing.JFrame {
         btnGrupos.setForeground(new java.awt.Color(255, 255, 255));
         btnGrupos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/grupos.png"))); // NOI18N
         btnGrupos.setToolTipText("Grupos");
-        btnGrupos.setActionCommand("");
         btnGrupos.setBorderPainted(false);
         btnGrupos.setPreferredSize(new java.awt.Dimension(250, 210));
         btnGrupos.addActionListener(new java.awt.event.ActionListener() {
@@ -112,6 +117,34 @@ public class Principal extends javax.swing.JFrame {
         lblPrateleiras.setForeground(new java.awt.Color(255, 255, 255));
         lblPrateleiras.setText("PRATELEIRAS");
 
+        rltSecoes.setText("Relatórios");
+
+        rltGrupos.setText("Grupos");
+        rltGrupos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rltGruposActionPerformed(evt);
+            }
+        });
+        rltSecoes.add(rltGrupos);
+
+        rltProdutos.setText("Produtos");
+        rltSecoes.add(rltProdutos);
+
+        jMenuItem1.setText("Seções");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        rltSecoes.add(jMenuItem1);
+
+        rltPrateleiras.setText("Prateleiras");
+        rltSecoes.add(rltPrateleiras);
+
+        jMenuBar1.add(rltSecoes);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,16 +157,18 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                         .addComponent(btnPrateleiras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(98, 98, 98)
+                                .addComponent(lblGrupos)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnProdutos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblProdutos)
+                                .addGap(83, 83, 83)))))
                 .addGap(20, 20, 20))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addComponent(lblGrupos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblProdutos)
-                .addGap(103, 103, 103))
             .addGroup(layout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addComponent(lblSecoes)
@@ -144,15 +179,17 @@ public class Principal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblGrupos)
-                    .addComponent(lblProdutos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblGrupos))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblProdutos)))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPrateleiras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSecoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -195,6 +232,14 @@ public class Principal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnPrateleirasActionPerformed
 
+    private void rltGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rltGruposActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rltGruposActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -202,9 +247,15 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnPrateleiras;
     private javax.swing.JButton btnProdutos;
     private javax.swing.JButton btnSecoes;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel lblGrupos;
     private javax.swing.JLabel lblPrateleiras;
     private javax.swing.JLabel lblProdutos;
     private javax.swing.JLabel lblSecoes;
+    private javax.swing.JMenuItem rltGrupos;
+    private javax.swing.JMenuItem rltPrateleiras;
+    private javax.swing.JMenuItem rltProdutos;
+    private javax.swing.JMenu rltSecoes;
     // End of variables declaration//GEN-END:variables
 }

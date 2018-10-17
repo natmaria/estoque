@@ -221,7 +221,7 @@ public class secaoController {
             {
 //                System.out.println("Vai Executar Conexão em buscar grupo");
                 rs = ConnectionFactory.stmt.executeQuery(SQL);
-//                System.out.println("Executou Conexão em buscar grupo");
+//                System.out.println("Executou Conexão em bu
 
                 objSecao = new Secao();
 

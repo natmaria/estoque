@@ -418,7 +418,6 @@ public class viewSecoes extends javax.swing.JFrame {
         // TODO add your handling code here:
         int linha = jtbSecoes.getSelectedRow();
         id = (int) jtbSecoes.getModel().getValueAt(linha, 0);
-        //        System.out.println(id);
 
         secaoController secaoCon = new secaoController();
         objSecao = secaoCon.buscar(id);
@@ -495,7 +494,6 @@ public class viewSecoes extends javax.swing.JFrame {
         objComboStatus.SetaComboBox(String.valueOf(objSecao.getStatus()));
         String tam;
         tam = formatacao.formataDecimal(objSecao.getTamanho());
-        //tam = String.valueOf(objSecao.getTamanho());
         txtTamanho.setValue(tam);
     }
     

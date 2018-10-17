@@ -50,7 +50,7 @@ public class viewPrateleiras extends javax.swing.JFrame {
         try 
         {
          objComboSecao = new Combos(jcbSecao);
-         objComboSecao.PreencheCombo("SELECT id, nome FROM secoes ORDER BY nome",false);
+         objComboSecao.PreencheCombo("SELECT id, nome FROM secoes ORDER BY nome",true);
         }    
         catch (SQLException e) 
         {
@@ -60,7 +60,7 @@ public class viewPrateleiras extends javax.swing.JFrame {
         try 
         {
          objComboProduto = new Combos(jcbProduto);
-         objComboProduto.PreencheCombo("SELECT id, nome FROM produtos ORDER BY nome",false);
+         objComboProduto.PreencheCombo("SELECT id, nome FROM produtos ORDER BY nome",true);
         }    
         catch (SQLException e) 
         {
@@ -640,9 +640,11 @@ public class viewPrateleiras extends javax.swing.JFrame {
   private boolean validarDados() 
     {
         try {
+            int produto = jcbProduto.getSelectedIndex();
+            int secao = jcbSecao.getSelectedIndex();
             prateleiraController prateleiraCon = new prateleiraController();
            if ((txtAltura.isEditValid()) && (txtNome.getText().trim().length()>1) && 
-                   (txtLargura.isEditValid()))
+                   (txtLargura.isEditValid()) && (produto!=0) && (secao!=0))
             {
             return true;
             } else

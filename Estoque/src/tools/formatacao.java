@@ -265,15 +265,11 @@ public class formatacao
     
     public static String formataDecimal(Double value)
     {
-        System.out.println(value);
         String valor,output = "";
 	try
 	{
-                //output = String.format("%03.2f", value);
-                //NumberFormat nf = NumberFormat.getNumberInstance(Locale.GERMAN);
 		String pattern = "000.00";
 		DecimalFormat myFormatter = new DecimalFormat(pattern);
-               // myFormatter = (DecimalFormat)nf;
 		valor = myFormatter.format(value);
                 output = valor.replace(",", ".");
 	}
