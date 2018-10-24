@@ -47,6 +47,7 @@ public class viewGrupos extends javax.swing.JFrame {
             System.out.println("Erro ao preencher combobox");
         }
         jcbStatus.setEnabled(false);
+        countRegistros();
     }
 
     /**
@@ -77,6 +78,8 @@ public class viewGrupos extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         txtBusca = new javax.swing.JTextField();
         btnBusca = new javax.swing.JButton();
+        lblReg = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -219,6 +222,8 @@ public class viewGrupos extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Registros");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -240,7 +245,6 @@ public class viewGrupos extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jScrollPane1)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(btnInserir)
                         .addGap(18, 18, 18)
                         .addComponent(btnAlterar)
@@ -251,19 +255,28 @@ public class viewGrupos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnLimpar))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(483, 483, 483)
+                        .addComponent(btnVoltar)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jcbInativos)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnVoltar))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 8, Short.MAX_VALUE)))
+                                .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jcbInativos)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblReg, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -285,23 +298,29 @@ public class viewGrupos extends javax.swing.JFrame {
                         .addComponent(lblStatus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInserir)
                     .addComponent(btnAlterar)
                     .addComponent(btnInativar)
                     .addComponent(btnLimpar)
                     .addComponent(btnExcluir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnBusca)
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVoltar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(1, 1, 1)
+                            .addComponent(jLabel1))
+                        .addComponent(lblReg, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jcbInativos))
+                .addGap(100, 100, 100)
+                .addComponent(btnVoltar)
                 .addGap(9, 9, 9))
         );
 
@@ -322,6 +341,7 @@ public class viewGrupos extends javax.swing.JFrame {
                     type=checkboxInativar();
                     atualizarTabela(type);
                     limparCampos();
+                    
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo inserido com sucesso!", "Inserido", 'i');
                 }
                 else
@@ -352,6 +372,7 @@ public class viewGrupos extends javax.swing.JFrame {
                 {
                     type=checkboxInativar();
                     atualizarTabela(type);
+                    
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo alterado com sucesso!", "Alterado", 'i');
                 }
                 else
@@ -382,6 +403,7 @@ public class viewGrupos extends javax.swing.JFrame {
                     type=checkboxInativar();
                     atualizarTabela(type);
                     limparCampos();
+                    
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo inativado com sucesso!", "Inativado", 'i');
                 }
                 else
@@ -435,6 +457,7 @@ public class viewGrupos extends javax.swing.JFrame {
         // TODO add your handling code here:
        type =checkboxInativar();
         atualizarTabela(type);
+        
     }//GEN-LAST:event_jcbInativosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -451,6 +474,7 @@ public class viewGrupos extends javax.swing.JFrame {
                         type = checkboxInativar();
                         atualizarTabela(type);
                         limparCampos();
+                        
                         CaixaDeDialogo.obterinstancia().exibirMensagem("Grupo excluído com sucesso!", "Excluído", 'i');
 
                     } else {
@@ -467,7 +491,7 @@ public class viewGrupos extends javax.swing.JFrame {
         grupoController grupoCon = new grupoController(null, jtbGrupos);
         type=checkboxInativar();
         grupoCon.preencherTabela(type,1,txtBusca.getText());
-        
+        countRegistros();
     }//GEN-LAST:event_btnBuscaActionPerformed
 
     private void txtNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyTyped
@@ -522,7 +546,7 @@ public class viewGrupos extends javax.swing.JFrame {
         {
             grupoController grupoCon = new grupoController(null, jtbGrupos);
             grupoCon.preencherTabela(type,0,null);
-
+            countRegistros();
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
         }
@@ -605,7 +629,12 @@ public class viewGrupos extends javax.swing.JFrame {
         }   
     }
     
-        
+ private void countRegistros()
+ {
+     int count = jtbGrupos.getRowCount();
+     lblReg.setText(String.valueOf(count));
+     
+ }
             
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
@@ -615,6 +644,7 @@ public class viewGrupos extends javax.swing.JFrame {
     private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JCheckBox jcbInativos;
@@ -623,6 +653,7 @@ public class viewGrupos extends javax.swing.JFrame {
     private javax.swing.JTable jtbGrupos;
     private javax.swing.JLabel lblInfo;
     private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblReg;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtBusca;

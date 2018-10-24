@@ -346,6 +346,8 @@ public class grupoController {
             ConnectionFactory.closeConnection(con, stmt);
         }    
     }
+    
+
         
 //    public boolean validarId(int id)
 //    {

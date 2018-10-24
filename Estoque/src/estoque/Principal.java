@@ -5,6 +5,14 @@
  */
 package estoque;
 
+import controllers.relatoriosController;
+import java.sql.ResultSet;
+import java.util.HashMap;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 import views.viewGrupos;
 import views.viewPrateleiras;
 import views.viewProdutos;
@@ -128,6 +136,11 @@ public class Principal extends javax.swing.JFrame {
         rltSecoes.add(rltGrupos);
 
         rltProdutos.setText("Produtos");
+        rltProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rltProdutosActionPerformed(evt);
+            }
+        });
         rltSecoes.add(rltProdutos);
 
         jMenuItem1.setText("Seções");
@@ -234,11 +247,43 @@ public class Principal extends javax.swing.JFrame {
 
     private void rltGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rltGruposActionPerformed
         // TODO add your handling code here:
+            try
+            {
+                relatoriosController rlCon = new relatoriosController();
+                ResultSet resultSet = rlCon.buscarRelatorioGrupos();//Buscar os dados do relatório
+                JRResultSetDataSource relResult = new JRResultSetDataSource(resultSet);//Passa um resultSet para a fonte de dados do relatório
+                JasperPrint jpPrint = JasperFillManager.fillReport("ireport/RelatorioGrupos.jasper", new HashMap(), relResult);//Prepara o relatório para ser impresso, recebe o gerenciador JASPER
+                JasperViewer jpViewer = new JasperViewer(jpPrint, false); //
+                jpViewer.setVisible(true);//abre o relatório para visualização
+                jpViewer.toFront();//define o form a frente da aplicação
+            }
+            catch (JRException ex)
+            {
+             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage(), 'e');           
+            }
     }//GEN-LAST:event_rltGruposActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void rltProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rltProdutosActionPerformed
+        // TODO add your handling code here:
+                    try
+            {
+                relatoriosController rlCon = new relatoriosController();
+                ResultSet resultSet = rlCon.buscarRelatorioProdutos();//Buscar os dados do relatório
+                JRResultSetDataSource relResult = new JRResultSetDataSource(resultSet);//Passa um resultSet para a fonte de dados do relatório
+                JasperPrint jpPrint = JasperFillManager.fillReport("ireport/RelatorioProdutos.jasper", new HashMap(), relResult);//Prepara o relatório para ser impresso, recebe o gerenciador JASPER
+                JasperViewer jpViewer = new JasperViewer(jpPrint, false); //
+                jpViewer.setVisible(true);//abre o relatório para visualização
+                jpViewer.toFront();//define o form a frente da aplicação
+            }
+            catch (JRException ex)
+            {
+             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage(), 'e');           
+            }
+    }//GEN-LAST:event_rltProdutosActionPerformed
 
 
 
