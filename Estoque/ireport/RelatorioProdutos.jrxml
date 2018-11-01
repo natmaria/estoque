@@ -16,10 +16,6 @@
 	</background>
 	<title>
 		<band height="163" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="0" width="540" height="100" uuid="a4509d66-eed7-4a20-a492-84012e65e1d2"/>
-				<imageExpression><![CDATA["C:\\Users\\nmpetry\\Documents\\estoque\\Estoque\\ireport\\banner.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="188" y="114" width="191" height="38" forecolor="#990033" uuid="6d84cd9b-8c30-429e-95ab-675b31667c1e"/>
 				<textElement>
@@ -27,6 +23,10 @@
 				</textElement>
 				<text><![CDATA[Relatório de Produtos]]></text>
 			</staticText>
+			<image>
+				<reportElement x="15" y="11" width="540" height="100" uuid="7e4923d3-8209-4a8d-ada4-43afd9d69b18"/>
+				<imageExpression><![CDATA["D:\\Desktop\\estoque\\Estoque\\ireport\\banner.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

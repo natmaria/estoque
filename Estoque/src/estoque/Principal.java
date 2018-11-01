@@ -127,7 +127,7 @@ public class Principal extends javax.swing.JFrame {
 
         rltSecoes.setText("Relatórios");
 
-        rltGrupos.setText("Grupos");
+        rltGrupos.setText("Produtos x Grupo");
         rltGrupos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rltGruposActionPerformed(evt);
@@ -151,7 +151,12 @@ public class Principal extends javax.swing.JFrame {
         });
         rltSecoes.add(jMenuItem1);
 
-        rltPrateleiras.setText("Prateleiras");
+        rltPrateleiras.setText("Produtos x Prateleiras");
+        rltPrateleiras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rltPrateleirasActionPerformed(evt);
+            }
+        });
         rltSecoes.add(rltPrateleiras);
 
         jMenuBar1.add(rltSecoes);
@@ -252,7 +257,7 @@ public class Principal extends javax.swing.JFrame {
                 relatoriosController rlCon = new relatoriosController();
                 ResultSet resultSet = rlCon.buscarRelatorioGrupos();//Buscar os dados do relatório
                 JRResultSetDataSource relResult = new JRResultSetDataSource(resultSet);//Passa um resultSet para a fonte de dados do relatório
-                JasperPrint jpPrint = JasperFillManager.fillReport("ireport/RelatorioGrupos.jasper", new HashMap(), relResult);//Prepara o relatório para ser impresso, recebe o gerenciador JASPER
+                JasperPrint jpPrint = JasperFillManager.fillReport("ireport/RelatorioProdutosxGrupo.jasper", new HashMap(), relResult);//Prepara o relatório para ser impresso, recebe o gerenciador JASPER
                 JasperViewer jpViewer = new JasperViewer(jpPrint, false); //
                 jpViewer.setVisible(true);//abre o relatório para visualização
                 jpViewer.toFront();//define o form a frente da aplicação
@@ -284,6 +289,25 @@ public class Principal extends javax.swing.JFrame {
              CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage(), 'e');           
             }
     }//GEN-LAST:event_rltProdutosActionPerformed
+
+    private void rltPrateleirasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rltPrateleirasActionPerformed
+        // TODO add your handling code here:
+        
+        try
+            {
+                relatoriosController rlCon = new relatoriosController();
+                ResultSet resultSet = rlCon.buscarRelatorioPrateleiras();//Buscar os dados do relatório
+                JRResultSetDataSource relResult = new JRResultSetDataSource(resultSet);//Passa um resultSet para a fonte de dados do relatório
+                JasperPrint jpPrint = JasperFillManager.fillReport("ireport/RelatorioProdutosxPrateleira.jasper", new HashMap(), relResult);//Prepara o relatório para ser impresso, recebe o gerenciador JASPER
+                JasperViewer jpViewer = new JasperViewer(jpPrint, false); //
+                jpViewer.setVisible(true);//abre o relatório para visualização
+                jpViewer.toFront();//define o form a frente da aplicação
+            }
+            catch (JRException ex)
+            {
+             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage(), 'e');           
+            }     
+    }//GEN-LAST:event_rltPrateleirasActionPerformed
 
 
 

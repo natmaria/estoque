@@ -11,7 +11,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="rltGrupos">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Grupos"/>
+                <Property name="text" type="java.lang.String" value="Produtos x Grupo"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rltGruposActionPerformed"/>
@@ -35,8 +35,11 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="rltPrateleiras">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Prateleiras"/>
+                <Property name="text" type="java.lang.String" value="Produtos x Prateleiras"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rltPrateleirasActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
