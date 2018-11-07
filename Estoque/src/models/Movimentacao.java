@@ -11,19 +11,27 @@ package models;
  * @author nmpetry
  */
 public class Movimentacao {
-    private String dthora;
+    private int id;
+    private String dtmov;
     private int codprod;
     private char operacao;
     private int qntd;
     private Double vlunit;
-    private int qntd_atual;
 
-    public String getDthora() {
-        return dthora;
+    public int getId() {
+        return id;
     }
 
-    public void setDthora(String dthora) {
-        this.dthora = dthora;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDtmov() {
+        return dtmov;
+    }
+
+    public void setDtmov(String dtmov) {
+        this.dtmov = dtmov;
     }
 
     public int getCodprod() {
@@ -57,14 +65,4 @@ public class Movimentacao {
     public void setVlunit(Double vlunit) {
         this.vlunit = vlunit;
     }
-
-    public int getQntd_atual() {
-        return qntd_atual;
-    }
-
-    public void setQntd_atual(int qntd_atual) {
-        this.qntd_atual = qntd_atual;
-    }
-    
-    
 }

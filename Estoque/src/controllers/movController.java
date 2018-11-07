@@ -7,10 +7,12 @@ package controllers;
 
 import estoque.ConnectionFactory;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import models.Movimentacao;
+import tools.formatacao;
 
 /**
  *
@@ -32,8 +34,9 @@ static Movimentacao objMovimentacao;
             ResultSet rs = null;
             int id = idp;
             String SQL = "";
-            SQL = " SELECT (SELECT SUM(qntd) FROM movimentacoes WHERE operacao='E' AND codprod = '" +id +"'-";
-            SQL += " (SELECT SUM(qntd) FROM movimentacoes WHERE operacao = 'S' AND codprod = codprod = '" +id +"')) ";
+            SQL = " SELECT ( ";
+            SQL += " (SELECT SUM(qntd) FROM movimentacoes WHERE operacao='E' AND codprod = '" + id + "')- ";
+            SQL += " (SELECT SUM(qntd) FROM movimentacoes WHERE operacao = 'S' AND codprod = '" + id + "')) ";
 
             //stm.executeQuery(SQL);  
         
@@ -60,7 +63,7 @@ static Movimentacao objMovimentacao;
      return qntd;
  }
  
-     public boolean incluir()
+     public boolean incluir(Movimentacao objMovimentacao)
     {
         
         ConnectionFactory.abreConexao();
@@ -69,14 +72,12 @@ static Movimentacao objMovimentacao;
         
         try 
         {
-            stmt = con.prepareStatement("INSERT INTO movimentacoes (dthora, codprod, qntd, vlunit, id_produto, status)VALUES(?,?,?,?,?,?)");
-//            stmt.setInt(1,objGrupo.getId());
-//            stmt.setString(1, objPrateleira.getNome());
-//            stmt.setDouble(2, objPrateleira.getAltura());
-//            stmt.setDouble(3, objPrateleira.getLargura());
-//            stmt.setInt(4, objPrateleira.getSecao());
-//            stmt.setInt(5, objPrateleira.getProduto());
-//            stmt.setInt(6, objPrateleira.getStatus());
+            stmt = con.prepareStatement("INSERT INTO movimentacoes(dtmov,codprod,operacao,qntd,vlunit) VALUES (?,?,?,?,?)");
+            stmt.setDate(1, Date.valueOf(objMovimentacao.getDtmov()));
+            stmt.setInt(2,objMovimentacao.getCodprod());
+            stmt.setString(3,String.valueOf(objMovimentacao.getOperacao()));
+            stmt.setInt(4,objMovimentacao.getQntd());
+            stmt.setDouble(5,objMovimentacao.getVlunit());
             
             stmt.executeUpdate();
             

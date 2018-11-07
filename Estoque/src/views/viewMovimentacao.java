@@ -255,7 +255,30 @@ Movimentacao objMovimentacao;
         // TODO add your handling code here:
         if (validarCampos() == true)
         {
-            
+            guardaDados();
+            movController mov = new movController();
+            try 
+            {
+                boolean inclusao = mov.incluir(objMovimentacao);
+                if (inclusao == true)
+                {
+                    limparCampos();
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Movimentação feita com sucesso!", "SUCESSO", 'i');
+                }
+                else
+                {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro na movimentação.", "ERRO", 'e');
+                }
+            }
+            catch (Exception e)
+            {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + e.getMessage());
+            }
+        }
+        else
+        {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("É necessário preencher todos os campos!", "CAMPOS!", 'e');
+
         }
     }//GEN-LAST:event_btnOkActionPerformed
 
@@ -305,7 +328,34 @@ public void limparCampos()
     txtVlunit.setValue("");
 }
 
-
+public void guardaDados()
+{
+    try 
+        {
+            objMovimentacao = new Movimentacao();
+            objMovimentacao.setDtmov(formatacao.retornaDataAtual("yyyy-MM-dd"));
+            if (jrbEntrada.isSelected())
+            {
+            objMovimentacao.setOperacao('E');
+            }
+            else
+            {
+                if (jrbSaida.isSelected())
+                {
+                    objMovimentacao.setOperacao('S');
+                }
+            }
+            objMovimentacao.setQntd(Integer.parseInt(txtQntd.getText()));
+            objMovimentacao.setVlunit(Double.parseDouble(txtVlunit.getText()));
+            Combos c = (Combos) jcbProduto.getSelectedItem();
+            String prod = c.getCodigo();
+            objMovimentacao.setCodprod(Integer.parseInt(prod));
+        }
+        catch (Exception ex)
+        {
+         CaixaDeDialogo.obterinstancia().exibirMensagem("Problemas no guardaDados: " + ex.getMessage());
+        }
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
     private javax.swing.JButton btnVoltar;
