@@ -50,7 +50,7 @@ public class viewPrateleiras extends javax.swing.JFrame {
         try 
         {
          objComboSecao = new Combos(jcbSecao);
-         objComboSecao.PreencheCombo("SELECT id, nome FROM secoes ORDER BY nome",true);
+         objComboSecao.PreencheCombo("SELECT id, nome FROM secoes WHERE status=1 ORDER BY nome",true);
         }    
         catch (SQLException e) 
         {
@@ -60,12 +60,13 @@ public class viewPrateleiras extends javax.swing.JFrame {
         try 
         {
          objComboProduto = new Combos(jcbProduto);
-         objComboProduto.PreencheCombo("SELECT id, nome FROM produtos ORDER BY nome",true);
+         objComboProduto.PreencheCombo("SELECT id, nome FROM produtos WHERE status=1 ORDER BY nome",true);
         }    
         catch (SQLException e) 
         {
             System.out.println("Erro ao preencher combobox");
         }
+        countRegistros();
     }
 
     /**
@@ -101,6 +102,8 @@ public class viewPrateleiras extends javax.swing.JFrame {
         jcbProduto = new javax.swing.JComboBox<>();
         txtAltura = new javax.swing.JFormattedTextField();
         txtLargura = new javax.swing.JFormattedTextField();
+        lblReg = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -270,37 +273,12 @@ public class viewPrateleiras extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Registros");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnInserir)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAlterar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnInativar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnExcluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLimpar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jcbInativos)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnVoltar))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,6 +316,38 @@ public class viewPrateleiras extends javax.swing.JFrame {
                             .addComponent(lblStatus)
                             .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnInserir)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAlterar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnInativar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLimpar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jcbInativos)
+                        .addGap(350, 350, 350)
+                        .addComponent(btnVoltar)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblReg, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel1))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,13 +389,17 @@ public class viewPrateleiras extends javax.swing.JFrame {
                     .addComponent(btnInativar)
                     .addComponent(btnLimpar)
                     .addComponent(btnExcluir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnBusca)
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(lblReg, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnVoltar)
                     .addComponent(jcbInativos))
@@ -455,6 +469,7 @@ public class viewPrateleiras extends javax.swing.JFrame {
         prateleiraController prateleiraCon = new prateleiraController(null, jtbPrateleiras);
         type=checkboxInativar();
         prateleiraCon.preencherTabela(type,1,txtBusca.getText());
+        countRegistros();
     }//GEN-LAST:event_btnBuscaActionPerformed
 
     private void jtbPrateleirasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbPrateleirasMouseClicked
@@ -609,7 +624,7 @@ public class viewPrateleiras extends javax.swing.JFrame {
         {
             prateleiraController prateleiraCon = new prateleiraController(null, jtbPrateleiras);
             prateleiraCon.preencherTabela(type,0,null);
-
+            countRegistros();
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
         }
@@ -723,9 +738,11 @@ public class viewPrateleiras extends javax.swing.JFrame {
             return 2;
         }   
     }
-    public static String padLeft(String s, int n) 
+
+    private void countRegistros()
     {
-    return String.format("%1$" + n + "s", s);  
+     int count = jtbPrateleiras.getRowCount();
+     lblReg.setText(String.valueOf(count));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
@@ -735,6 +752,7 @@ public class viewPrateleiras extends javax.swing.JFrame {
     private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JCheckBox jcbInativos;
     private javax.swing.JComboBox<String> jcbProduto;
@@ -745,6 +763,7 @@ public class viewPrateleiras extends javax.swing.JFrame {
     private javax.swing.JLabel lblLargura;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblProduto;
+    private javax.swing.JLabel lblReg;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblStatus1;
     private javax.swing.JLabel lblTitulo;

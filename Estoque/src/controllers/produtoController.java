@@ -259,7 +259,7 @@ public class produtoController
         
         try 
         {
-            stmt = con.prepareStatement("INSERT INTO produtos (nome, info, id_grupo, qntd_min, status, data_add)VALUES(?,?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO produtos (nome, info, id_grupo, qntd_min, status, data_add, qntd_atual)VALUES(?,?,?,?,?,?,0)");
 //            stmt.setInt(1,objGrupo.getId());
             stmt.setString(1, objProduto.getNome());
             stmt.setString(2, objProduto.getInfo());

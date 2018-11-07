@@ -14,6 +14,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
 import views.viewGrupos;
+import views.viewMovimentacao;
 import views.viewPrateleiras;
 import views.viewProdutos;
 import views.viewSecoes;
@@ -40,100 +41,91 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnGrupos = new javax.swing.JButton();
-        btnProdutos = new javax.swing.JButton();
-        btnSecoes = new javax.swing.JButton();
-        btnPrateleiras = new javax.swing.JButton();
-        lblGrupos = new javax.swing.JLabel();
-        lblProdutos = new javax.swing.JLabel();
-        lblSecoes = new javax.swing.JLabel();
-        lblPrateleiras = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
+        btnGrupos = new javax.swing.JMenu();
+        mnGrupos = new javax.swing.JMenuItem();
+        mnProdutos = new javax.swing.JMenuItem();
+        mnSecoes = new javax.swing.JMenuItem();
+        mnPrateleiras = new javax.swing.JMenuItem();
+        mnMovimentacao = new javax.swing.JMenu();
+        mvMovimentar = new javax.swing.JMenuItem();
         rltSecoes = new javax.swing.JMenu();
-        rltGrupos = new javax.swing.JMenuItem();
+        rltGruposxProdutos = new javax.swing.JMenuItem();
         rltProdutos = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        rltGrupo = new javax.swing.JMenuItem();
         rltPrateleiras = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 300));
+        setSize(new java.awt.Dimension(600, 300));
 
-        btnGrupos.setBackground(new java.awt.Color(255, 255, 255));
-        btnGrupos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnGrupos.setForeground(new java.awt.Color(255, 255, 255));
-        btnGrupos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/grupos.png"))); // NOI18N
-        btnGrupos.setToolTipText("Grupos");
-        btnGrupos.setBorderPainted(false);
-        btnGrupos.setPreferredSize(new java.awt.Dimension(250, 210));
-        btnGrupos.addActionListener(new java.awt.event.ActionListener() {
+        lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(204, 0, 0));
+        lblTitulo.setText("Sistema de Estrutura de Estoque");
+
+        btnGrupos.setText("Cadastros");
+
+        mnGrupos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/grupos.png"))); // NOI18N
+        mnGrupos.setText("Grupos");
+        mnGrupos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGruposActionPerformed(evt);
+                mnGruposActionPerformed(evt);
             }
         });
+        btnGrupos.add(mnGrupos);
 
-        btnProdutos.setBackground(new java.awt.Color(255, 255, 255));
-        btnProdutos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnProdutos.setForeground(new java.awt.Color(255, 255, 255));
-        btnProdutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/produtos.png"))); // NOI18N
-        btnProdutos.setToolTipText("Produtos");
-        btnProdutos.setBorderPainted(false);
-        btnProdutos.setPreferredSize(new java.awt.Dimension(250, 210));
-        btnProdutos.addActionListener(new java.awt.event.ActionListener() {
+        mnProdutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/produtos.png"))); // NOI18N
+        mnProdutos.setText("Produtos");
+        mnProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProdutosActionPerformed(evt);
+                mnProdutosActionPerformed(evt);
             }
         });
+        btnGrupos.add(mnProdutos);
 
-        btnSecoes.setBackground(new java.awt.Color(255, 255, 255));
-        btnSecoes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnSecoes.setForeground(new java.awt.Color(255, 255, 255));
-        btnSecoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/secoes.png"))); // NOI18N
-        btnSecoes.setToolTipText("Seções");
-        btnSecoes.setBorderPainted(false);
-        btnSecoes.setPreferredSize(new java.awt.Dimension(250, 210));
-        btnSecoes.addActionListener(new java.awt.event.ActionListener() {
+        mnSecoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/secoes.png"))); // NOI18N
+        mnSecoes.setText("Seções");
+        mnSecoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSecoesActionPerformed(evt);
+                mnSecoesActionPerformed(evt);
             }
         });
+        btnGrupos.add(mnSecoes);
 
-        btnPrateleiras.setBackground(new java.awt.Color(255, 255, 255));
-        btnPrateleiras.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnPrateleiras.setForeground(new java.awt.Color(255, 255, 255));
-        btnPrateleiras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/prateleiras.png"))); // NOI18N
-        btnPrateleiras.setToolTipText("Prateleiras");
-        btnPrateleiras.setBorderPainted(false);
-        btnPrateleiras.setPreferredSize(new java.awt.Dimension(250, 210));
-        btnPrateleiras.addActionListener(new java.awt.event.ActionListener() {
+        mnPrateleiras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/prateleiras.png"))); // NOI18N
+        mnPrateleiras.setText("Prateleiras");
+        mnPrateleiras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrateleirasActionPerformed(evt);
+                mnPrateleirasActionPerformed(evt);
             }
         });
+        btnGrupos.add(mnPrateleiras);
 
-        lblGrupos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblGrupos.setForeground(new java.awt.Color(255, 255, 255));
-        lblGrupos.setText("GRUPOS");
+        jMenuBar1.add(btnGrupos);
 
-        lblProdutos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblProdutos.setForeground(new java.awt.Color(255, 255, 255));
-        lblProdutos.setText("PRODUTOS");
+        mnMovimentacao.setText("Movimentações");
 
-        lblSecoes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblSecoes.setForeground(new java.awt.Color(255, 255, 255));
-        lblSecoes.setText("SEÇÕES");
+        mvMovimentar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/movimentar.png"))); // NOI18N
+        mvMovimentar.setText("Movimentar");
+        mvMovimentar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mvMovimentarActionPerformed(evt);
+            }
+        });
+        mnMovimentacao.add(mvMovimentar);
 
-        lblPrateleiras.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblPrateleiras.setForeground(new java.awt.Color(255, 255, 255));
-        lblPrateleiras.setText("PRATELEIRAS");
+        jMenuBar1.add(mnMovimentacao);
 
         rltSecoes.setText("Relatórios");
 
-        rltGrupos.setText("Produtos x Grupo");
-        rltGrupos.addActionListener(new java.awt.event.ActionListener() {
+        rltGruposxProdutos.setText("Produtos x Grupo");
+        rltGruposxProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rltGruposActionPerformed(evt);
+                rltGruposxProdutosActionPerformed(evt);
             }
         });
-        rltSecoes.add(rltGrupos);
+        rltSecoes.add(rltGruposxProdutos);
 
         rltProdutos.setText("Produtos");
         rltProdutos.addActionListener(new java.awt.event.ActionListener() {
@@ -143,13 +135,13 @@ public class Principal extends javax.swing.JFrame {
         });
         rltSecoes.add(rltProdutos);
 
-        jMenuItem1.setText("Seções");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        rltGrupo.setText("Grupos");
+        rltGrupo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                rltGrupoActionPerformed(evt);
             }
         });
-        rltSecoes.add(jMenuItem1);
+        rltSecoes.add(rltGrupo);
 
         rltPrateleiras.setText("Produtos x Prateleiras");
         rltPrateleiras.addActionListener(new java.awt.event.ActionListener() {
@@ -168,89 +160,22 @@ public class Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSecoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                        .addComponent(btnPrateleiras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(98, 98, 98)
-                                .addComponent(lblGrupos)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnProdutos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblProdutos)
-                                .addGap(83, 83, 83)))))
-                .addGap(20, 20, 20))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(lblSecoes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblPrateleiras)
-                .addGap(90, 90, 90))
+                .addGap(57, 57, 57)
+                .addComponent(lblTitulo)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnGrupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblGrupos))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblProdutos)))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPrateleiras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSecoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSecoes)
-                    .addComponent(lblPrateleiras))
-                .addGap(26, 26, 26))
+                .addGap(59, 59, 59)
+                .addComponent(lblTitulo)
+                .addContainerGap(483, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGruposActionPerformed
-        // TODO add your handling code here:
-        viewGrupos grupos = new viewGrupos();
-        grupos.setVisible(true);
-        this.dispose();
-
-    }//GEN-LAST:event_btnGruposActionPerformed
-
-    private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
-        // TODO add your handling code here:
-        viewProdutos produtos = new viewProdutos();
-        produtos.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnProdutosActionPerformed
-
-    private void btnSecoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSecoesActionPerformed
-        // TODO add your handling code here:
-        viewSecoes secoes = new viewSecoes();
-        secoes.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnSecoesActionPerformed
-
-    private void btnPrateleirasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrateleirasActionPerformed
-        // TODO add your handling code here:
-        viewPrateleiras prateleiras = new viewPrateleiras();
-        prateleiras.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnPrateleirasActionPerformed
-
-    private void rltGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rltGruposActionPerformed
+    private void rltGruposxProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rltGruposxProdutosActionPerformed
         // TODO add your handling code here:
             try
             {
@@ -266,11 +191,25 @@ public class Principal extends javax.swing.JFrame {
             {
              CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage(), 'e');           
             }
-    }//GEN-LAST:event_rltGruposActionPerformed
+    }//GEN-LAST:event_rltGruposxProdutosActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void rltGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rltGrupoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+            try
+            {
+                relatoriosController rlCon = new relatoriosController();
+                ResultSet resultSet = rlCon.buscarRelatorioGrupo();//Buscar os dados do relatório
+                JRResultSetDataSource relResult = new JRResultSetDataSource(resultSet);//Passa um resultSet para a fonte de dados do relatório
+                JasperPrint jpPrint = JasperFillManager.fillReport("ireport/Grupos.jasper", new HashMap(), relResult);//Prepara o relatório para ser impresso, recebe o gerenciador JASPER
+                JasperViewer jpViewer = new JasperViewer(jpPrint, false); //
+                jpViewer.setVisible(true);//abre o relatório para visualização
+                jpViewer.toFront();//define o form a frente da aplicação
+            }
+            catch (JRException ex)
+            {
+             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage(), 'e');           
+            }      
+    }//GEN-LAST:event_rltGrupoActionPerformed
 
     private void rltProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rltProdutosActionPerformed
         // TODO add your handling code here:
@@ -309,20 +248,55 @@ public class Principal extends javax.swing.JFrame {
             }     
     }//GEN-LAST:event_rltPrateleirasActionPerformed
 
+    private void mnGruposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnGruposActionPerformed
+        // TODO add your handling code here:
+        viewGrupos grupo = new viewGrupos();
+        grupo.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mnGruposActionPerformed
+
+    private void mnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnProdutosActionPerformed
+        // TODO add your handling code here:
+        viewProdutos produtos = new viewProdutos();
+        produtos.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mnProdutosActionPerformed
+
+    private void mnSecoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSecoesActionPerformed
+        // TODO add your handling code here:
+        viewSecoes secoes = new viewSecoes();
+        secoes.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mnSecoesActionPerformed
+
+    private void mnPrateleirasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPrateleirasActionPerformed
+        // TODO add your handling code here:
+        viewPrateleiras prateleiras = new viewPrateleiras();
+        prateleiras.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mnPrateleirasActionPerformed
+
+    private void mvMovimentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mvMovimentarActionPerformed
+        // TODO add your handling code here:
+        viewMovimentacao movi = new viewMovimentacao();
+        movi.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mvMovimentarActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGrupos;
-    private javax.swing.JButton btnPrateleiras;
-    private javax.swing.JButton btnProdutos;
-    private javax.swing.JButton btnSecoes;
+    private javax.swing.JMenu btnGrupos;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JLabel lblGrupos;
-    private javax.swing.JLabel lblPrateleiras;
-    private javax.swing.JLabel lblProdutos;
-    private javax.swing.JLabel lblSecoes;
-    private javax.swing.JMenuItem rltGrupos;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JMenuItem mnGrupos;
+    private javax.swing.JMenu mnMovimentacao;
+    private javax.swing.JMenuItem mnPrateleiras;
+    private javax.swing.JMenuItem mnProdutos;
+    private javax.swing.JMenuItem mnSecoes;
+    private javax.swing.JMenuItem mvMovimentar;
+    private javax.swing.JMenuItem rltGrupo;
+    private javax.swing.JMenuItem rltGruposxProdutos;
     private javax.swing.JMenuItem rltPrateleiras;
     private javax.swing.JMenuItem rltProdutos;
     private javax.swing.JMenu rltSecoes;
