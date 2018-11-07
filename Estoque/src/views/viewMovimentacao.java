@@ -253,12 +253,20 @@ Movimentacao objMovimentacao;
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // TODO add your handling code here:
-
+        if (validarCampos() == true)
+        {
+            
+        }
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void jcbProdutoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbProdutoItemStateChanged
         // TODO add your handling code here:   
-        if (jcbProduto != null && jcbProduto.getSelectedIndex()>0)
+        preencherQntdAtual();
+    }//GEN-LAST:event_jcbProdutoItemStateChanged
+
+public void preencherQntdAtual()
+{
+          if (jcbProduto != null && jcbProduto.getSelectedIndex()>0)
         {
             Combos com = (Combos) jcbProduto.getSelectedItem();
             if(com != null){
@@ -268,8 +276,34 @@ Movimentacao objMovimentacao;
                  int qntd_atual = mov.buscarQuantidadeAtual(id);
                  txtQntdAtual.setText(String.valueOf(qntd_atual));
             }
-        }
-    }//GEN-LAST:event_jcbProdutoItemStateChanged
+        }  
+}
+
+public boolean validarCampos()
+{
+          try {
+            int produto = jcbProduto.getSelectedIndex();
+           if ((txtVlunit.isEditValid()) && (txtQntd.getText().trim().length()>0) && 
+                   (groupOperacao.getSelection()!=null) && (produto!=0))
+            {
+            return true;
+            } else
+               return false;
+        } 
+        catch (Exception ex) 
+        {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+            return false;
+        }  
+}
+
+public void limparCampos()
+{
+    objComboProduto.SetaComboBox("");
+    txtQntd.setText("");
+    txtQntdAtual.setText("");
+    txtVlunit.setValue("");
+}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

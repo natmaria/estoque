@@ -6,6 +6,8 @@
 package controllers;
 
 import estoque.ConnectionFactory;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import models.Movimentacao;
@@ -30,7 +32,7 @@ static Movimentacao objMovimentacao;
             ResultSet rs = null;
             int id = idp;
             String SQL = "";
-            SQL = " SELECT (SELECT SUM(qntd) FROM movimentacoes WHERE operacao = 'E' AND codprod = '" +id +"'-";
+            SQL = " SELECT (SELECT SUM(qntd) FROM movimentacoes WHERE operacao='E' AND codprod = '" +id +"'-";
             SQL += " (SELECT SUM(qntd) FROM movimentacoes WHERE operacao = 'S' AND codprod = codprod = '" +id +"')) ";
 
             //stm.executeQuery(SQL);  
@@ -57,4 +59,37 @@ static Movimentacao objMovimentacao;
         }
      return qntd;
  }
+ 
+     public boolean incluir()
+    {
+        
+        ConnectionFactory.abreConexao();
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try 
+        {
+            stmt = con.prepareStatement("INSERT INTO movimentacoes (dthora, codprod, qntd, vlunit, id_produto, status)VALUES(?,?,?,?,?,?)");
+//            stmt.setInt(1,objGrupo.getId());
+//            stmt.setString(1, objPrateleira.getNome());
+//            stmt.setDouble(2, objPrateleira.getAltura());
+//            stmt.setDouble(3, objPrateleira.getLargura());
+//            stmt.setInt(4, objPrateleira.getSecao());
+//            stmt.setInt(5, objPrateleira.getProduto());
+//            stmt.setInt(6, objPrateleira.getStatus());
+            
+            stmt.executeUpdate();
+            
+            return true;
+            
+        } catch (SQLException ex) 
+        {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+        finally
+        {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
 }
