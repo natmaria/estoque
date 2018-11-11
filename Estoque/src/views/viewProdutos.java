@@ -42,7 +42,7 @@ public class viewProdutos extends javax.swing.JFrame {
         try 
         {
          objComboStatus = new Combos(jcbStatus);
-         objComboStatus.PreencheCombo("SELECT id, nome FROM status ORDER BY nome",false);
+         objComboStatus.PreencheCombo("SELECT id, nome FROM status ORDER BY nome",0);
         
         }    
         catch (SQLException e) 
@@ -53,7 +53,7 @@ public class viewProdutos extends javax.swing.JFrame {
         try 
         {
          objComboGrupos = new Combos(jcbGrupos);
-         objComboGrupos.PreencheCombo("SELECT id, nome FROM grupos WHERE status=1 ORDER BY nome",true);
+         objComboGrupos.PreencheCombo("SELECT id, nome FROM grupos WHERE status=1 ORDER BY nome",1);
         }    
         catch (SQLException e) 
         {

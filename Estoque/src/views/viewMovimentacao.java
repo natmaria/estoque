@@ -28,7 +28,7 @@ Movimentacao objMovimentacao;
         try 
         {
          objComboProduto = new Combos(jcbProduto);
-         objComboProduto.PreencheCombo("SELECT id, nome FROM produtos WHERE status=1 ORDER BY nome",true);
+         objComboProduto.PreencheCombo("SELECT id, nome FROM produtos WHERE status=1 ORDER BY nome",1);
         }    
         catch (SQLException e) 
         {

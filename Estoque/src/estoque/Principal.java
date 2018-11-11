@@ -51,10 +51,11 @@ public class Principal extends javax.swing.JFrame {
         mnMovimentacao = new javax.swing.JMenu();
         mvMovimentar = new javax.swing.JMenuItem();
         rltSecoes = new javax.swing.JMenu();
-        rltGruposxProdutos = new javax.swing.JMenuItem();
-        rltProdutos = new javax.swing.JMenuItem();
         rltGrupo = new javax.swing.JMenuItem();
+        rltGruposxProdutos = new javax.swing.JMenuItem();
         rltPrateleiras = new javax.swing.JMenuItem();
+        rltProdutos = new javax.swing.JMenuItem();
+        rltProdutosFalta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(600, 300));
@@ -119,22 +120,6 @@ public class Principal extends javax.swing.JFrame {
 
         rltSecoes.setText("Relatórios");
 
-        rltGruposxProdutos.setText("Produtos x Grupo");
-        rltGruposxProdutos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rltGruposxProdutosActionPerformed(evt);
-            }
-        });
-        rltSecoes.add(rltGruposxProdutos);
-
-        rltProdutos.setText("Produtos");
-        rltProdutos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rltProdutosActionPerformed(evt);
-            }
-        });
-        rltSecoes.add(rltProdutos);
-
         rltGrupo.setText("Grupos");
         rltGrupo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +128,14 @@ public class Principal extends javax.swing.JFrame {
         });
         rltSecoes.add(rltGrupo);
 
+        rltGruposxProdutos.setText("Produtos x Grupo");
+        rltGruposxProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rltGruposxProdutosActionPerformed(evt);
+            }
+        });
+        rltSecoes.add(rltGruposxProdutos);
+
         rltPrateleiras.setText("Produtos x Prateleiras");
         rltPrateleiras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +143,17 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         rltSecoes.add(rltPrateleiras);
+
+        rltProdutos.setText("Todos Produtos");
+        rltProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rltProdutosActionPerformed(evt);
+            }
+        });
+        rltSecoes.add(rltProdutos);
+
+        rltProdutosFalta.setText("Produtos em falta");
+        rltSecoes.add(rltProdutosFalta);
 
         jMenuBar1.add(rltSecoes);
 
@@ -177,20 +181,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void rltGruposxProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rltGruposxProdutosActionPerformed
         // TODO add your handling code here:
-            try
-            {
-                relatoriosController rlCon = new relatoriosController();
-                ResultSet resultSet = rlCon.buscarRelatorioGrupos();//Buscar os dados do relatório
-                JRResultSetDataSource relResult = new JRResultSetDataSource(resultSet);//Passa um resultSet para a fonte de dados do relatório
-                JasperPrint jpPrint = JasperFillManager.fillReport("ireport/RelatorioProdutosxGrupo.jasper", new HashMap(), relResult);//Prepara o relatório para ser impresso, recebe o gerenciador JASPER
-                JasperViewer jpViewer = new JasperViewer(jpPrint, false); //
-                jpViewer.setVisible(true);//abre o relatório para visualização
-                jpViewer.toFront();//define o form a frente da aplicação
-            }
-            catch (JRException ex)
-            {
-             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage(), 'e');           
-            }
+    selecaoRelatorio sr = new selecaoRelatorio(null,true);
+    sr.setVisible(true);
+    
     }//GEN-LAST:event_rltGruposxProdutosActionPerformed
 
     private void rltGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rltGrupoActionPerformed
@@ -299,6 +292,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem rltGruposxProdutos;
     private javax.swing.JMenuItem rltPrateleiras;
     private javax.swing.JMenuItem rltProdutos;
+    private javax.swing.JMenuItem rltProdutosFalta;
     private javax.swing.JMenu rltSecoes;
     // End of variables declaration//GEN-END:variables
 }

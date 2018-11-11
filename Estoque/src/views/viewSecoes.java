@@ -36,7 +36,7 @@ public class viewSecoes extends javax.swing.JFrame {
         try 
         {
          objComboStatus = new Combos(jcbStatus);
-         objComboStatus.PreencheCombo("SELECT id, nome FROM status ORDER BY nome",false);
+         objComboStatus.PreencheCombo("SELECT id, nome FROM status ORDER BY nome",0);
         }    
         catch (SQLException e) 
         {

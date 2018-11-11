@@ -14,27 +14,47 @@ import java.sql.SQLException;
  * @author nmpetry
  */
 public class relatoriosController {
-    public ResultSet buscarRelatorioGrupos()
+    public ResultSet buscarRelatorioGrupos(int grupo)
     {
         ResultSet rs = null;
         try {
             ConnectionFactory.abreConexao();
-            
+            if (grupo == 0)
+            {
             String SQL = "";
             SQL = " select g.nome as grupo, po.nome, po.qntd_min from grupos g, produtos po where g.id=po.id_grupo and g.status=1 and po.status=1 ";
-
+            
             try{
                 //System.out.println("Vai Executar Conexão em buscar visitante");
                 rs = ConnectionFactory.stmt.executeQuery(SQL);
             }
-
+            
             catch (SQLException ex )
             {
                 System.out.println("ERRO de SQL: " + ex.getMessage().toString());
                 return rs;
             }
-
-        } catch (Exception e) {
+            }
+            else
+            {
+             String SQL = "";
+            SQL = " select g.nome as grupo, po.nome, po.qntd_min from grupos g, produtos po where g.id=po.id_grupo and g.status=1 and po.status=1 ";
+            SQL+= " AND po.id_grupo= '" + grupo + "'";
+            
+            try{
+                //System.out.println("Vai Executar Conexão em buscar visitante");
+                rs = ConnectionFactory.stmt.executeQuery(SQL);
+            }
+            
+            catch (SQLException ex )
+            {
+                System.out.println("ERRO de SQL: " + ex.getMessage().toString());
+                return rs;  
+            }
+        }
+        }
+            catch (Exception e) 
+            {
             System.out.println("ERRO: " + e.getMessage().toString());
             return rs;
         }

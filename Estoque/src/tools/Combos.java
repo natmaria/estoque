@@ -75,7 +75,7 @@ public class Combos {
         return 1;
     }
 
-    public int PreencheCombo(String wSQL, boolean selecione) throws SQLException{
+    public int PreencheCombo(String wSQL, int selecione) throws SQLException{
             
         ConnectionFactory.abreConexao();
         result = ConnectionFactory.stmt.executeQuery(wSQL);
@@ -84,10 +84,16 @@ public class Combos {
         
         cbCombo.removeAllItems();
         Combos combo = new Combos();
-        if (selecione==true) 
+        if (selecione==1) 
         {
         combo.setCodigo("");
         combo.setDescricao("Selecione...");
+        cbCombo.addItem(combo);
+        }
+        if (selecione==2) 
+        {
+        combo.setCodigo("");
+        combo.setDescricao("Todos");
         cbCombo.addItem(combo);
         }
         while (result.next()) {

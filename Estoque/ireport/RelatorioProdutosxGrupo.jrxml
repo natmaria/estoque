@@ -51,10 +51,6 @@
 				</textElement>
 				<text><![CDATA[Relatório de Produtos por Grupo]]></text>
 			</staticText>
-			<image>
-				<reportElement x="8" y="11" width="540" height="100" uuid="be44f634-1bd5-478f-a160-a6a503e35de9"/>
-				<imageExpression><![CDATA["C:\\Users\\nmpetry\\Documents\\estoque\\Estoque\\ireport\\banner.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
