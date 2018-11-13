@@ -32,11 +32,10 @@ static Movimentacao objMovimentacao;
         {
             ConnectionFactory.abreConexao();
             ResultSet rs = null;
-            int id = idp;
             String SQL = "";
             SQL = " SELECT ( ";
-            SQL += " (SELECT SUM(qntd) FROM movimentacoes WHERE operacao='E' AND codprod = '" + id + "')- ";
-            SQL += " (SELECT SUM(qntd) FROM movimentacoes WHERE operacao = 'S' AND codprod = '" + id + "')) ";
+            SQL += " (SELECT COALESCE(SUM(qntd),0) FROM movimentacoes WHERE operacao='E' AND codprod = '" + idp + "')- ";
+            SQL += " (SELECT COALESCE(SUM(qntd),0) FROM movimentacoes WHERE operacao = 'S' AND codprod = '" + idp + "')) ";
 
             //stm.executeQuery(SQL);  
         
@@ -72,7 +71,7 @@ static Movimentacao objMovimentacao;
         
         try 
         {
-            stmt = con.prepareStatement("INSERT INTO movimentacoes(dtmov,codprod,operacao,qntd,vlunit) VALUES (?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO movimentacoes(dthora,codprod,operacao,qntd,vlunit) VALUES (?,?,?,?,?)");
             stmt.setDate(1, Date.valueOf(objMovimentacao.getDtmov()));
             stmt.setInt(2,objMovimentacao.getCodprod());
             stmt.setString(3,String.valueOf(objMovimentacao.getOperacao()));

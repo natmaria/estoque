@@ -126,8 +126,9 @@ public class selecaoRelatorio extends javax.swing.JDialog {
         // TODO add your handling code here:
             try
             {
+                int gru = grupoSelecionado();
                 relatoriosController rlCon = new relatoriosController();
-                ResultSet resultSet = rlCon.buscarRelatorioGrupos(grupo);//Buscar os dados do relatório
+                ResultSet resultSet = rlCon.buscarRelatorioGrupos(gru);//Buscar os dados do relatório
                 JRResultSetDataSource relResult = new JRResultSetDataSource(resultSet);//Passa um resultSet para a fonte de dados do relatório
                 JasperPrint jpPrint = JasperFillManager.fillReport("ireport/RelatorioProdutosxGrupo.jasper", new HashMap(), relResult);//Prepara o relatório para ser impresso, recebe o gerenciador JASPER
                 JasperViewer jpViewer = new JasperViewer(jpPrint, false); //
@@ -138,7 +139,7 @@ public class selecaoRelatorio extends javax.swing.JDialog {
             {
              CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage(), 'e');           
             }
-
+            this.dispose();
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

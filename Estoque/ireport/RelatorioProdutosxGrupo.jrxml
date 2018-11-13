@@ -4,11 +4,12 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[select g.nome as grupo, po.nome, po.qntd_min from grupos g, produtos po where po.id_grupo=g.id order by grupo]]>
+		<![CDATA[select g.nome as grupo, po.nome, po.qntd_min,((SELECT SUM(qntd) FROM movimentacoes WHERE operacao='E' and codprod=po.id)-(SELECT SUM(qntd) FROM movimentacoes WHERE operacao = 'S' and codprod=po.id)) as qntd_atual from grupos g, produtos po where g.id=po.id_grupo and g.status=1 and po.status=1]]>
 	</queryString>
 	<field name="grupo" class="java.lang.String"/>
 	<field name="nome" class="java.lang.String"/>
 	<field name="qntd_min" class="java.lang.Integer"/>
+	<field name="qntd_atual" class="java.lang.Long"/>
 	<group name="grupo">
 		<groupExpression><![CDATA[$F{grupo}]]></groupExpression>
 	</group>
@@ -81,7 +82,7 @@
 		<band height="16" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="58" splitType="Stretch">
+		<band height="71" splitType="Stretch">
 			<textField>
 				<reportElement x="56" y="18" width="100" height="20" uuid="b57cf2db-7a8a-4a3f-8ace-95ce7baf84c7"/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
@@ -105,11 +106,22 @@
 				<text><![CDATA[Quantidade mínima:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="10" y="48" width="538" height="1" uuid="75a71f6a-c196-4021-8e0c-cd7d23f83b89"/>
+				<reportElement x="10" y="70" width="538" height="1" uuid="75a71f6a-c196-4021-8e0c-cd7d23f83b89"/>
 				<graphicElement>
 					<pen lineStyle="Dotted" lineColor="#CCCCCC"/>
 				</graphicElement>
 			</line>
+			<staticText>
+				<reportElement x="222" y="50" width="100" height="20" forecolor="#990033" uuid="a1d92fc7-7f98-4b5c-948d-11de025f965c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade atual:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="322" y="51" width="100" height="20" uuid="1083f55e-2e02-4e55-83e4-9121001a3fbb"/>
+				<textFieldExpression><![CDATA[$F{qntd_atual}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>

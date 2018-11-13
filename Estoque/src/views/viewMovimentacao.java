@@ -61,7 +61,7 @@ Movimentacao objMovimentacao;
         lblQntdAtual = new javax.swing.JLabel();
         txtQntdAtual = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(400, 400));
         setSize(new java.awt.Dimension(400, 400));
 

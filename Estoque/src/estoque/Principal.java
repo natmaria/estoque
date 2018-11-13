@@ -153,6 +153,11 @@ public class Principal extends javax.swing.JFrame {
         rltSecoes.add(rltProdutos);
 
         rltProdutosFalta.setText("Produtos em falta");
+        rltProdutosFalta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rltProdutosFaltaActionPerformed(evt);
+            }
+        });
         rltSecoes.add(rltProdutosFalta);
 
         jMenuBar1.add(rltSecoes);
@@ -275,6 +280,10 @@ public class Principal extends javax.swing.JFrame {
         movi.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_mvMovimentarActionPerformed
+
+    private void rltProdutosFaltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rltProdutosFaltaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rltProdutosFaltaActionPerformed
 
 
 

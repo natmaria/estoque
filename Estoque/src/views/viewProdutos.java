@@ -59,6 +59,7 @@ public class viewProdutos extends javax.swing.JFrame {
         {
             System.out.println("Erro ao preencher combobox");
         }
+        txtDataAdd.setText(formatacao.retornaDataAtual("dd/MM/yyyy"));
     }
 
     /**
@@ -638,6 +639,7 @@ public class viewProdutos extends javax.swing.JFrame {
         jcbInativos.setSelected(false);
         type=checkboxInativar();
         atualizarTabela(type);
+        txtDataAdd.setText(formatacao.retornaDataAtual("dd/MM/yyyy"));
     }
     private void atualizarTabela(int type) 
     {

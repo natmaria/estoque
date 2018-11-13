@@ -22,7 +22,7 @@ public class relatoriosController {
             if (grupo == 0)
             {
             String SQL = "";
-            SQL = " select g.nome as grupo, po.nome, po.qntd_min from grupos g, produtos po where g.id=po.id_grupo and g.status=1 and po.status=1 ";
+            SQL = " select g.nome as grupo, po.nome, po.qntd_min,((SELECT COALESCE(SUM(qntd),0) FROM movimentacoes WHERE operacao='E' and codprod=po.id)-(SELECT COASLESCE(SUM(qntd),0) FROM movimentacoes WHERE operacao = 'S' and codprod=po.id)) as qntd_atual from grupos g, produtos po where g.id=po.id_grupo and g.status=1 and po.status=1 ";
             
             try{
                 //System.out.println("Vai Executar Conexão em buscar visitante");
@@ -38,7 +38,7 @@ public class relatoriosController {
             else
             {
              String SQL = "";
-            SQL = " select g.nome as grupo, po.nome, po.qntd_min from grupos g, produtos po where g.id=po.id_grupo and g.status=1 and po.status=1 ";
+            SQL = " select g.nome as grupo, po.nome, po.qntd_min,((SELECT COALESCE(SUM(qntd),0) FROM movimentacoes WHERE operacao='E' and codprod=po.id)-(SELECT COALESCE(SUM(qntd),0) FROM movimentacoes WHERE operacao = 'S' and codprod=po.id)) as qntd_atual from grupos g, produtos po where g.id=po.id_grupo and g.status=1 and po.status=1 ";
             SQL+= " AND po.id_grupo= '" + grupo + "'";
             
             try{
