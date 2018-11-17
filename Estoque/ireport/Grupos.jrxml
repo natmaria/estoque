@@ -15,33 +15,6 @@ GROUP BY g.id]]>
 	<group name="nome">
 		<groupExpression><![CDATA[$F{nome}]]></groupExpression>
 	</group>
-	<group name="grupo">
-		<groupExpression><![CDATA[$F{nome}]]></groupExpression>
-		<groupHeader>
-			<band height="39">
-				<textField>
-					<reportElement x="10" y="11" width="271" height="20" uuid="23448273-a4db-4bc6-bf0f-b4cf05ed5ae5"/>
-					<textElement>
-						<font isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement x="486" y="11" width="62" height="20" forecolor="#990033" uuid="9e482e66-8ec5-407a-9c76-9a29e44e5d4a"/>
-					<textElement>
-						<font isBold="true"/>
-					</textElement>
-					<text><![CDATA[Grupo]]></text>
-				</staticText>
-				<line>
-					<reportElement x="12" y="31" width="538" height="1" uuid="ada2a1e2-f743-4f54-b638-b98247c67112"/>
-				</line>
-			</band>
-		</groupHeader>
-		<groupFooter>
-			<band height="12"/>
-		</groupFooter>
-	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -54,14 +27,20 @@ GROUP BY g.id]]>
 				</textElement>
 				<text><![CDATA[Relatório de Grupos]]></text>
 			</staticText>
-			<image>
-				<reportElement x="10" y="12" width="540" height="100" uuid="0496e86b-1c7e-4133-a399-b8635014f463"/>
-				<imageExpression><![CDATA["C:\\Users\\nmpetry\\Documents\\estoque\\Estoque\\ireport\\banner.png"]]></imageExpression>
-			</image>
+			<rectangle>
+				<reportElement x="10" y="11" width="533" height="94" backcolor="#990033" uuid="1e5c1f08-3124-47dc-a4a3-185762b26737"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="403" y="11" width="126" height="94" forecolor="#FFFFFF" uuid="fbc506b4-9851-4815-be0a-784ff6ba2885"/>
+				<textElement>
+					<font size="50"/>
+				</textElement>
+				<text><![CDATA[NMP]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="45" splitType="Stretch">
+		<band height="32" splitType="Stretch">
 			<staticText>
 				<reportElement x="10" y="10" width="29" height="20" uuid="6fc8054f-415e-40a7-8784-e80960391dda"/>
 				<text><![CDATA[Data:]]></text>
@@ -79,48 +58,69 @@ GROUP BY g.id]]>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement x="10" y="30" width="538" height="1" uuid="77bad302-4b3b-4dd8-8313-428969184fcf"/>
-			</line>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="12" splitType="Stretch"/>
-	</columnHeader>
-	<detail>
-		<band height="85" splitType="Stretch">
+		<band height="38" splitType="Stretch">
 			<staticText>
-				<reportElement x="10" y="11" width="301" height="20" forecolor="#990033" uuid="d9db292c-6d19-48db-b25c-9cbff052e26c"/>
+				<reportElement x="12" y="1" width="127" height="36" forecolor="#990033" uuid="9e482e66-8ec5-407a-9c76-9a29e44e5d4a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grupo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="157" y="1" width="273" height="36" forecolor="#990033" uuid="d9db292c-6d19-48db-b25c-9cbff052e26c"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Informações:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="10" y="31" width="301" height="47" uuid="3b68498a-144e-4395-aa4c-35ef20145aa7"/>
-				<textFieldExpression><![CDATA[$F{info}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="350" y="11" width="100" height="36" forecolor="#990033" uuid="d8bf5819-f47e-4a30-bcb0-7f1188bb5e01"/>
+				<reportElement x="444" y="1" width="100" height="36" forecolor="#990033" uuid="d8bf5819-f47e-4a30-bcb0-7f1188bb5e01"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Quantidade de Produtos:]]></text>
 			</staticText>
+			<line>
+				<reportElement x="10" y="37" width="538" height="1" uuid="ada2a1e2-f743-4f54-b638-b98247c67112"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="44" splitType="Stretch">
 			<textField>
-				<reportElement x="470" y="11" width="78" height="20" uuid="4b9dc554-f77c-4cda-abd6-02b721947a3c"/>
+				<reportElement x="157" y="11" width="273" height="32" uuid="3b68498a-144e-4395-aa4c-35ef20145aa7"/>
+				<textFieldExpression><![CDATA[$F{info}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="11" width="78" height="20" uuid="4b9dc554-f77c-4cda-abd6-02b721947a3c"/>
 				<textFieldExpression><![CDATA[$F{count}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="12" y="78" width="538" height="1" uuid="70eb853c-293c-4eee-9818-8521721eb5fc"/>
+				<reportElement x="10" y="43" width="538" height="1" uuid="70eb853c-293c-4eee-9818-8521721eb5fc"/>
 				<graphicElement>
 					<pen lineStyle="Dotted" lineColor="#CCCCCC"/>
 				</graphicElement>
 			</line>
+			<textField>
+				<reportElement x="12" y="11" width="128" height="20" uuid="23448273-a4db-4bc6-bf0f-b4cf05ed5ae5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="140" y="0" width="1" height="43" uuid="783fad96-1fca-4054-aefc-ccf7c0ab8b1f"/>
+			</line>
+			<line>
+				<reportElement x="430" y="0" width="1" height="43" uuid="70fdc796-d1d5-4758-bf63-00a87934f1aa"/>
+			</line>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="7" splitType="Stretch"/>
+		<band height="2" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch">

@@ -22,7 +22,7 @@ public class relatoriosController {
             if (grupo == 0)
             {
             String SQL = "";
-            SQL = " select g.nome as grupo, po.nome, po.qntd_min,((SELECT COALESCE(SUM(qntd),0) FROM movimentacoes WHERE operacao='E' and codprod=po.id)-(SELECT COASLESCE(SUM(qntd),0) FROM movimentacoes WHERE operacao = 'S' and codprod=po.id)) as qntd_atual from grupos g, produtos po where g.id=po.id_grupo and g.status=1 and po.status=1 ";
+            SQL = " select g.nome as grupo, po.nome, po.qntd_min,((SELECT COALESCE(SUM(qntd),0) FROM movimentacoes WHERE operacao='E' and codprod=po.id)-(SELECT COALESCE(SUM(qntd),0) FROM movimentacoes WHERE operacao = 'S' and codprod=po.id)) as qntd_atual from grupos g, produtos po where g.id=po.id_grupo and g.status=1 and po.status=1 ";
             
             try{
                 //System.out.println("Vai Executar Conexão em buscar visitante");
@@ -51,7 +51,7 @@ public class relatoriosController {
                 System.out.println("ERRO de SQL: " + ex.getMessage().toString());
                 return rs;  
             }
-        }
+            }
         }
             catch (Exception e) 
             {
@@ -152,5 +152,34 @@ public class relatoriosController {
         //System.out.println ("Executou buscar visitante com sucesso");
         return rs;
     }
- 
+    public ResultSet buscarRelatorioProdutosFalta()
+    {
+        ResultSet rs = null;
+        try {
+            ConnectionFactory.abreConexao();
+            
+            String SQL = "";
+            SQL = " select po.id,po.nome, po.info, po.qntd_min, g.nome as grupo, ((SELECT COALESCE(SUM(qntd),0) FROM movimentacoes WHERE operacao='E' and codprod=po.id)-(SELECT COALESCE(SUM(qntd),0) FROM movimentacoes WHERE operacao = 'S' and codprod=po.id)) as qntd_atual ";
+            SQL+= " from produtos po, grupos g where po.id_grupo=g.id AND g.status=1 AND po.status=1 GROUP BY g.nome,po.id ";
+            SQL+= " HAVING ((SELECT COALESCE(SUM(qntd),0) FROM movimentacoes WHERE operacao='E' and codprod=po.id)-(SELECT COALESCE(SUM(qntd),0) FROM movimentacoes WHERE operacao = 'S' and codprod=po.id)) < qntd_min ";
+
+            try{
+                //System.out.println("Vai Executar Conexão em buscar visitante");
+                rs = ConnectionFactory.stmt.executeQuery(SQL);
+            }
+
+            catch (SQLException ex )
+            {
+                System.out.println("ERRO de SQL: " + ex.getMessage().toString());
+                return rs;
+            }
+
+        } catch (Exception e) {
+            System.out.println("ERRO: " + e.getMessage().toString());
+            return rs;
+        }
+        
+        //System.out.println ("Executou buscar visitante com sucesso");
+        return rs;
+    }
 }

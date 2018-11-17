@@ -18,7 +18,7 @@
 		<groupHeader>
 			<band height="44">
 				<textField>
-					<reportElement x="21" y="13" width="226" height="20" uuid="a8224935-579c-4052-bbd6-071659d25b14"/>
+					<reportElement x="56" y="13" width="226" height="20" uuid="a8224935-579c-4052-bbd6-071659d25b14"/>
 					<textElement>
 						<font isBold="true"/>
 					</textElement>
@@ -28,7 +28,7 @@
 					<reportElement x="10" y="33" width="538" height="1" uuid="daf9328d-c56c-4a72-8343-3359f5317b46"/>
 				</line>
 				<staticText>
-					<reportElement x="464" y="13" width="62" height="20" forecolor="#990033" uuid="dba567f6-5bd4-46d2-8084-08d727c6251e"/>
+					<reportElement x="13" y="14" width="43" height="20" forecolor="#990033" uuid="dba567f6-5bd4-46d2-8084-08d727c6251e"/>
 					<textElement>
 						<font isBold="true" isItalic="false"/>
 					</textElement>
@@ -51,6 +51,16 @@
 					<font size="18" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Relatório de Produtos por Grupo]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="10" y="11" width="533" height="94" backcolor="#990033" uuid="0582f6f5-6cba-4b5f-a67e-3bb3c3a8217f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="403" y="11" width="126" height="94" forecolor="#FFFFFF" uuid="d2d76405-c2e2-40cb-aee6-2eaa65a3cf98"/>
+				<textElement>
+					<font size="50"/>
+				</textElement>
+				<text><![CDATA[NMP]]></text>
 			</staticText>
 		</band>
 	</title>

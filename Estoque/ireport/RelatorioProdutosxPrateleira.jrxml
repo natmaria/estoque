@@ -18,21 +18,21 @@ order by s.nome]]>
 	<group name="secao">
 		<groupExpression><![CDATA[$F{secao}]]></groupExpression>
 		<groupHeader>
-			<band height="23">
-				<textField>
-					<reportElement x="15" y="0" width="100" height="20" uuid="907e08ef-84d1-4e24-bd48-2c5f5c1ade21"/>
-					<textFieldExpression><![CDATA[$F{secao}]]></textFieldExpression>
-				</textField>
+			<band height="28">
 				<staticText>
-					<reportElement x="471" y="0" width="72" height="20" forecolor="#990033" uuid="d2ed1c66-c78d-4e29-a911-a87e514c968a"/>
+					<reportElement x="14" y="4" width="35" height="20" forecolor="#990033" uuid="d2ed1c66-c78d-4e29-a911-a87e514c968a"/>
 					<textElement>
 						<font isBold="true"/>
 					</textElement>
 					<text><![CDATA[Seção]]></text>
 				</staticText>
 				<line>
-					<reportElement x="10" y="19" width="538" height="1" uuid="863233cf-b728-4c57-9759-081cd726efc6"/>
+					<reportElement x="10" y="23" width="538" height="1" uuid="863233cf-b728-4c57-9759-081cd726efc6"/>
 				</line>
+				<textField>
+					<reportElement x="49" y="5" width="100" height="20" uuid="907e08ef-84d1-4e24-bd48-2c5f5c1ade21"/>
+					<textFieldExpression><![CDATA[$F{secao}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupHeader>
 		<groupFooter>
@@ -43,7 +43,7 @@ order by s.nome]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="177" splitType="Stretch">
+		<band height="169" splitType="Stretch">
 			<staticText>
 				<reportElement x="130" y="127" width="331" height="38" forecolor="#990033" uuid="c304eb33-c950-4794-a921-e5b1ba183f66"/>
 				<textElement>
@@ -51,14 +51,20 @@ order by s.nome]]>
 				</textElement>
 				<text><![CDATA[Relatório de Produtos por Prateleira]]></text>
 			</staticText>
-			<image>
-				<reportElement x="8" y="17" width="540" height="100" uuid="b49bc23d-4fde-4cdb-995f-91f663a2194e"/>
-				<imageExpression><![CDATA["C:\\Users\\nmpetry\\Documents\\estoque\\Estoque\\ireport\\banner.png"]]></imageExpression>
-			</image>
+			<rectangle>
+				<reportElement x="10" y="11" width="533" height="94" backcolor="#990033" uuid="8d11a022-2e54-4c38-bb5e-f2cfbf630a9e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="403" y="11" width="126" height="94" forecolor="#FFFFFF" uuid="36441490-5477-40fa-ab49-94cf87104c7f"/>
+				<textElement>
+					<font size="50"/>
+				</textElement>
+				<text><![CDATA[NMP]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="45" splitType="Stretch">
+		<band height="32" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="39" y="10" width="100" height="20" uuid="28ecba77-fc79-4856-a5e1-165af2297ca4"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
@@ -76,9 +82,6 @@ order by s.nome]]>
 				<reportElement x="503" y="10" width="40" height="20" uuid="91185df2-7016-48ab-a6d8-9174928b87c4"/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement x="10" y="41" width="538" height="1" forecolor="#990033" uuid="d8bff8e1-4a68-43ab-b100-7dd70f73ac80"/>
-			</line>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -87,7 +90,7 @@ order by s.nome]]>
 	<detail>
 		<band height="78" splitType="Stretch">
 			<staticText>
-				<reportElement x="303" y="0" width="100" height="30" forecolor="#990033" uuid="1497102d-8ab8-4fae-8d77-ee96f61ef54f"/>
+				<reportElement x="262" y="0" width="100" height="30" forecolor="#990033" uuid="1497102d-8ab8-4fae-8d77-ee96f61ef54f"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -95,33 +98,33 @@ order by s.nome]]>
 mínima:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="59" y="0" width="46" height="20" forecolor="#990033" uuid="7224cd32-6b53-4f78-a7bf-e572936cb39f"/>
+				<reportElement x="24" y="0" width="46" height="20" forecolor="#990033" uuid="7224cd32-6b53-4f78-a7bf-e572936cb39f"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Produto:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="403" y="0" width="100" height="20" uuid="9af5b0e5-e1fb-4276-a24d-297b6ff5f674"/>
+				<reportElement x="362" y="0" width="100" height="20" uuid="9af5b0e5-e1fb-4276-a24d-297b6ff5f674"/>
 				<textFieldExpression><![CDATA[$F{qntd_min}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="105" y="0" width="168" height="20" uuid="c7d16e78-93b2-4ab0-8da4-89f072c4211a"/>
+				<reportElement x="70" y="0" width="168" height="20" uuid="c7d16e78-93b2-4ab0-8da4-89f072c4211a"/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="59" y="37" width="100" height="20" forecolor="#990033" uuid="7805fa7b-4a76-430a-b7bc-5b0e78bb735d"/>
+				<reportElement x="24" y="37" width="100" height="20" forecolor="#990033" uuid="7805fa7b-4a76-430a-b7bc-5b0e78bb735d"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Prateleira:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="157" y="37" width="100" height="20" uuid="306fd8ed-c501-4c05-8edb-d9dc9ff87e96"/>
+				<reportElement x="122" y="37" width="100" height="20" uuid="306fd8ed-c501-4c05-8edb-d9dc9ff87e96"/>
 				<textFieldExpression><![CDATA[$F{prateleira}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="49" y="57" width="504" height="1" uuid="2a8ba8a3-f061-4796-9237-5eb6effd7441"/>
+				<reportElement x="25" y="57" width="504" height="1" uuid="2a8ba8a3-f061-4796-9237-5eb6effd7441"/>
 				<graphicElement>
 					<pen lineStyle="Dotted" lineColor="#CCCCCC"/>
 				</graphicElement>

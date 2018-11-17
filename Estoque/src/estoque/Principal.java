@@ -283,6 +283,20 @@ public class Principal extends javax.swing.JFrame {
 
     private void rltProdutosFaltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rltProdutosFaltaActionPerformed
         // TODO add your handling code here:
+            try
+            {
+                relatoriosController rlCon = new relatoriosController();
+                ResultSet resultSet = rlCon.buscarRelatorioProdutosFalta();//Buscar os dados do relatório
+                JRResultSetDataSource relResult = new JRResultSetDataSource(resultSet);//Passa um resultSet para a fonte de dados do relatório
+                JasperPrint jpPrint = JasperFillManager.fillReport("ireport/ProdutosFalta.jasper", new HashMap(), relResult);//Prepara o relatório para ser impresso, recebe o gerenciador JASPER
+                JasperViewer jpViewer = new JasperViewer(jpPrint, false); //
+                jpViewer.setVisible(true);//abre o relatório para visualização
+                jpViewer.toFront();//define o form a frente da aplicação
+            }
+            catch (JRException ex)
+            {
+             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage(), 'e');           
+            }
     }//GEN-LAST:event_rltProdutosFaltaActionPerformed
 
 
