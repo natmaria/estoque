@@ -32,7 +32,7 @@ public class loginController {
         StringBuilder comandoSQL = new StringBuilder();
         comandoSQL.append(" SELECT id,login,nome,senha ");
         comandoSQL.append(" FROM usuarios ");
-        comandoSQL.append(" WHERE login ='" + usuario +"'" );
+        comandoSQL.append(" WHERE UPPER(login) ='" + usuario.toUpperCase() +"'" );
         comandoSQL.append(" AND senha ='" + senha + "'" );
         try 
         {

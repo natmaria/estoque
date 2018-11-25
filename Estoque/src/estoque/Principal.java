@@ -18,6 +18,7 @@ import views.viewMovimentacao;
 import views.viewPrateleiras;
 import views.viewProdutos;
 import views.viewSecoes;
+import views.viewUsuarios;
 
 /**
  *
@@ -48,6 +49,7 @@ public class Principal extends javax.swing.JFrame {
         mnProdutos = new javax.swing.JMenuItem();
         mnSecoes = new javax.swing.JMenuItem();
         mnPrateleiras = new javax.swing.JMenuItem();
+        mnUsuarios = new javax.swing.JMenuItem();
         mnMovimentacao = new javax.swing.JMenu();
         mvMovimentar = new javax.swing.JMenuItem();
         rltSecoes = new javax.swing.JMenu();
@@ -102,6 +104,15 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         btnGrupos.add(mnPrateleiras);
+
+        mnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/usuarios.png"))); // NOI18N
+        mnUsuarios.setText("Usuários");
+        mnUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnUsuariosActionPerformed(evt);
+            }
+        });
+        btnGrupos.add(mnUsuarios);
 
         jMenuBar1.add(btnGrupos);
 
@@ -299,6 +310,13 @@ public class Principal extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_rltProdutosFaltaActionPerformed
 
+    private void mnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnUsuariosActionPerformed
+        // TODO add your handling code here:
+        viewUsuarios usu = new viewUsuarios();
+        usu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mnUsuariosActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -310,6 +328,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnPrateleiras;
     private javax.swing.JMenuItem mnProdutos;
     private javax.swing.JMenuItem mnSecoes;
+    private javax.swing.JMenuItem mnUsuarios;
     private javax.swing.JMenuItem mvMovimentar;
     private javax.swing.JMenuItem rltGrupo;
     private javax.swing.JMenuItem rltGruposxProdutos;

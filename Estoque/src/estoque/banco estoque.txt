@@ -4,10 +4,13 @@ id serial not null,
 login varchar(10) not null,
 nome varchar(100) not null,
 senha varchar(100) not null,
+status int not null,
+dt_inativado date,
 CONSTRAINT PK_usuarios PRIMARY KEY(id),
-CONSTRAINT UN_loginusuarios UNIQUE(login)
+CONSTRAINT UN_loginusuarios UNIQUE(login),
+CONSTRAINT FK_statususuarios FOREIGN KEY(status) REFERENCES status
 );
-insert into usuarios (login, nome, senha) VALUES ('admin', 'Administrador', 'admin123');
+insert into usuarios (login, nome, senha, status) VALUES ('admin', 'Administrador', 'admin123', 1);
 
 create table status
 (

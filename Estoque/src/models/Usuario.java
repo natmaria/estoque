@@ -14,6 +14,24 @@ public class Usuario {
    private String nome;
    private String login;
    private String senha;
+   private int status;
+private String dt_inativado;
+
+    public String getDt_inativado() {
+        return dt_inativado;
+    }
+
+    public void setDt_inativado(String dt_inativado) {
+        this.dt_inativado = dt_inativado;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public int getId() {
         return id;
